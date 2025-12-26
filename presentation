@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공부가 '감'에서 '훈련'이 되는 순간 - SNarGPT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 4rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease-in-out;
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .accent-text {
+            color: #fbbf24;
+        }
+
+        .danger-text {
+            color: #ef4444;
+        }
+
+        .comparison-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            background: #3b82f6;
+            transition: width 0.3s;
+        }
+
+        .bg-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .bg-person {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 90vh;
+            z-index: 0;
+            opacity: 0.4;
+            filter: grayscale(20%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <!-- Slide 0: Title -->
+    <div class="slide active" id="slide-0">
+        <div class="text-center">
+            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight">
+                공부가 <span class="accent-text">'감'</span>에서<br>
+                <span class="text-blue-500">'훈련'</span>이 되는 순간
+            </h1>
+            <p class="text-2xl text-slate-400 mb-12">SNarGPT, 공부의 본질을 바꾸다</p>
+            <div class="h-1 w-24 bg-blue-500 mx-auto mb-8"></div>
+            <p class="text-xl font-bold">SN독학기숙학원 대표</p>
+        </div>
+    </div>
+
+    <!-- Slide 1: Opening - Lee Sedol -->
+    <div class="slide" id="slide-1">
+        <!-- 배경 인물 이미지 추가 -->
+        <img src="http://googleusercontent.com/image_generation_content/0" class="bg-person" alt="인물 배경">
+        
+        <div class="max-w-5xl text-center relative z-10">
+            <p class="text-3xl text-slate-400 mb-6 italic">2016년, 그날 이후</p>
+            <h2 class="text-5xl md:text-7xl font-bold leading-snug mb-12">
+                “AI가 나오면 실력 격차는<br>
+                줄어들 줄 알았다.”
+            </h2>
+            <div class="p-8 bg-slate-800 rounded-3xl inline-block border-2 border-slate-700">
+                <p class="text-3xl font-bold text-blue-400 italic">하지만 현실은 정반대였습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Unexpected Result -->
+    <div class="slide" id="slide-2">
+        <h2 class="text-4xl font-bold mb-16">예상치 못한 결과: 격차의 심화</h2>
+        <div class="flex flex-col md:flex-row gap-12 items-center">
+            <div class="text-center">
+                <svg width="400" height="300" viewBox="0 0 400 300" class="mb-6">
+                    <line x1="50" y1="250" x2="350" y2="250" stroke="white" stroke-width="2"/>
+                    <line x1="50" y1="250" x2="50" y2="50" stroke="white" stroke-width="2"/>
+                    <!-- Gap line -->
+                    <path d="M50 150 Q 150 140 350 50" stroke="#ef4444" stroke-width="4" fill="none" />
+                    <path d="M50 150 Q 150 160 350 240" stroke="#3b82f6" stroke-width="4" fill="none" />
+                    <text x="360" y="55" fill="#ef4444" font-weight="bold">상위권</text>
+                    <text x="360" y="245" fill="#3b82f6" font-weight="bold">하위권</text>
+                </svg>
+                <p class="text-2xl font-bold">실력의 양극화</p>
+            </div>
+            <div class="max-w-md">
+                <p class="text-3xl font-bold leading-relaxed">
+                    왜 정답을 알려주는 존재가 생겼는데<br>
+                    <span class="danger-text">격차는 더 커졌을까요?</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Comparison -->
+    <div class="slide" id="slide-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            <div class="comparison-card border-slate-700">
+                <p class="text-blue-400 font-bold mb-4 uppercase tracking-widest">하위권</p>
+                <h3 class="text-4xl font-black mb-6">정답 생성기</h3>
+                <p class="text-xl text-slate-400">AI가 시키는 대로 무작정 따라하기.<br>결과에만 집착하는 태도.</p>
+            </div>
+            <div class="comparison-card border-blue-500 shadow-2xl shadow-blue-900/20">
+                <p class="text-accent-text font-bold mb-4 uppercase tracking-widest">상위권</p>
+                <h3 class="text-4xl font-black mb-6">판단 훈련기</h3>
+                <p class="text-xl text-slate-400">AI가 왜 그 수를 두었는지 파고들기.<br>나의 '판단 로직'을 교정하는 훈련.</p>
+            </div>
+        </div>
+        <p class="mt-16 text-3xl font-bold">여러분은 AI를 어떻게 대하고 있습니까?</p>
+    </div>
+
+    <!-- Slide 4: The Question -->
+    <div class="slide bg-red-950/20" id="slide-4">
+        <h2 class="text-5xl md:text-7xl font-black text-center leading-tight">
+            “여러분은 <span class="accent-text">왜 틀렸는지</span><br>
+            알고 틀립니까,<br>
+            아니면 모르고 틀립니까?”
+        </h2>
+        <p class="mt-12 text-2xl text-slate-400">이유를 모르는 틀림은 '훈련'이 아니라 <span class="danger-text font-bold">'반복'</span>일 뿐입니다.</p>
+    </div>
+
+    <!-- Slide 5: MLB -->
+    <div class="slide" id="slide-5">
+        <h2 class="text-4xl font-bold mb-12">이미 야구는 바뀌었습니다 (MLB)</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl mb-12">
+            <div class="p-6 bg-slate-800 rounded-2xl text-center">
+                <p class="text-slate-400 text-sm mb-2">스윙 각도</p>
+                <p class="text-3xl font-bold">15°</p>
+            </div>
+            <div class="p-6 bg-slate-800 rounded-2xl text-center">
+                <p class="text-slate-400 text-sm mb-2">배트 스피드</p>
+                <p class="text-3xl font-bold">112<span class="text-sm">km/h</span></p>
+            </div>
+            <div class="p-6 bg-slate-800 rounded-2xl text-center">
+                <p class="text-slate-400 text-sm mb-2">발사 속도</p>
+                <p class="text-3xl font-bold">98<span class="text-sm">mph</span></p>
+            </div>
+            <div class="p-6 bg-slate-800 rounded-2xl text-center">
+                <p class="text-slate-400 text-sm mb-2">회전수</p>
+                <p class="text-3xl font-bold">2400<span class="text-sm">rpm</span></p>
+            </div>
+        </div>
+        <p class="text-3xl font-bold text-center">더 이상 '타격감' 같은 느낌으로 말하지 않습니다.</p>
+    </div>
+
+    <!-- Slide 6: Study Reality -->
+    <div class="slide" id="slide-6">
+        <div class="max-w-4xl">
+            <h2 class="text-4xl font-bold mb-12">공부는 아직도 ‘감’의 영역에 있습니까?</h2>
+            <div class="space-y-6 mb-12">
+                <div class="flex items-center gap-6 p-6 bg-red-900/10 border-l-4 border-red-500">
+                    <span class="text-4xl">❌</span>
+                    <p class="text-2xl italic">“오늘 컨디션이 별로라 실수했어요.”</p>
+                </div>
+                <div class="flex items-center gap-6 p-6 bg-red-900/10 border-l-4 border-red-500">
+                    <span class="text-4xl">❌</span>
+                    <p class="text-2xl italic">“그냥 감이 안 좋아서 틀렸어요.”</p>
+                </div>
+            </div>
+            <p class="text-3xl font-black text-center text-blue-400">공부에도 ‘데이터 기반 훈련 시스템’이 필요합니다.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Why SN AI -->
+    <div class="slide bg-blue-950/20" id="slide-7">
+        <h2 class="text-3xl text-blue-400 font-bold mb-8 italic">SN이 AI를 만든 진짜 이유</h2>
+        <div class="max-w-4xl text-center">
+            <h3 class="text-5xl md:text-7xl font-black mb-12 leading-tight">
+                “학생의 사고 과정을<br>
+                <span class="accent-text">숨길 수 없는 구조</span>”
+            </h3>
+            <div class="inline-block px-10 py-4 bg-blue-600 rounded-full text-3xl font-black tracking-widest">
+                SNarGPT
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Scene 1 -->
+    <div class="slide" id="slide-8">
+        <h2 class="text-4xl font-bold mb-12">Scene ① ‘점’의 공부를 ‘선’의 훈련으로</h2>
+        <div class="flex items-center justify-between w-full max-w-4xl">
+            <div class="text-center opacity-50">
+                <div class="w-16 h-16 bg-slate-600 rounded-full mx-auto mb-4"></div>
+                <p>문제 풀이</p>
+            </div>
+            <div class="h-1 flex-1 bg-blue-500 mx-4 relative">
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-xs px-2 py-1 rounded">SN Training</div>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-blue-500 rounded-full mx-auto mb-4 shadow-lg shadow-blue-500/50"></div>
+                <p class="font-bold">로직 검증 / 조건 변형</p>
+            </div>
+        </div>
+        <div class="mt-16 grid grid-cols-3 gap-6 text-center text-slate-400">
+            <p>1. 유사 문제 연결</p>
+            <p>2. 판단 로직 검증</p>
+            <p>3. 조건 변형 훈련</p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Scene 2 -->
+    <div class="slide" id="slide-9">
+        <h2 class="text-4xl font-bold mb-12">Scene ② 지식의 <span class="accent-text">해상도</span>를 나에게 맞추다</h2>
+        <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 max-w-2xl w-full">
+            <div class="mb-6 pb-6 border-b border-slate-700">
+                <p class="text-blue-400 text-sm mb-2">나의 요청</p>
+                <p class="text-2xl font-bold">“지금 이 문제를 푸는 데 <span class="text-white underline">딱 필요한 만큼만</span> 알려줘”</p>
+            </div>
+            <div>
+                <p class="text-blue-400 text-sm mb-2">나의 요청</p>
+                <p class="text-2xl font-bold">“수능 범위 안에서만 이 개념의 이유를 설명해줘”</p>
+            </div>
+        </div>
+        <p class="mt-12 text-2xl text-slate-400">지식의 양이 아닙니다. 정확한 초점이 중요합니다.</p>
+    </div>
+
+    <!-- Slide 10: Scene 3 -->
+    <div class="slide" id="slide-10">
+        <h2 class="text-4xl font-bold mb-12">Scene ③ 사고를 충돌시켜 기준을 세우다</h2>
+        <div class="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
+            <div class="flex-1 p-8 bg-slate-800 rounded-2xl border-l-8 border-orange-500">
+                <p class="font-bold text-orange-500 mb-4">AI Coach A</p>
+                <p class="text-xl">“이렇게 이해하는 것이 정석입니다.”</p>
+            </div>
+            <div class="flex items-center justify-center text-4xl">VS</div>
+            <div class="flex-1 p-8 bg-slate-800 rounded-2xl border-r-8 border-red-500">
+                <p class="font-bold text-red-500 mb-4">AI Coach B</p>
+                <p class="text-xl">“하지만 그렇게 풀면 이런 함정에서 무너집니다.”</p>
+            </div>
+        </div>
+        <div class="mt-12 p-6 bg-blue-600 rounded-xl text-3xl font-black">
+            “수능에서는 여기까지만 안전하다.”
+        </div>
+    </div>
+
+    <!-- Slide 11: System 1/3 -->
+    <div class="slide" id="slide-11">
+        <h2 class="text-4xl font-bold mb-12">SNarGPT는 전체 시스템의 1/3입니다</h2>
+        <div class="relative w-80 h-80 flex items-center justify-center">
+            <!-- Interlocking Gears Mockup -->
+            <div class="absolute top-0 w-32 h-32 bg-blue-500 rounded-full flex items-center justify-center text-center p-2 text-xs font-bold shadow-lg">사고 방식<br>(SNarGPT)</div>
+            <div class="absolute bottom-4 left-0 w-32 h-32 bg-slate-700 rounded-full flex items-center justify-center text-center p-2 text-xs font-bold">실제 학습량<br>데이터</div>
+            <div class="absolute bottom-4 right-0 w-32 h-32 bg-slate-600 rounded-full flex items-center justify-center text-center p-2 text-xs font-bold">선생님<br>리포트</div>
+        </div>
+        <p class="mt-16 text-3xl font-bold">이 세 가지가 맞물려 돌아갈 때, 진짜 성적이 바뀝니다.</p>
+    </div>
+
+    <!-- Slide 12: Final Message -->
+    <div class="slide bg-slate-900" id="slide-12">
+        <div class="text-center max-w-4xl">
+            <h2 class="text-4xl text-blue-400 font-bold mb-12 tracking-widest uppercase">Conclusion</h2>
+            <h3 class="text-5xl md:text-7xl font-black mb-16 leading-tight">
+                정답을 묻지 마세요.<br>
+                <span class="accent-text">“내 판단이 어디서 무너졌는지”</span>를<br>
+                물으세요.
+            </h3>
+            <div class="h-1 w-48 bg-blue-500 mx-auto mb-12"></div>
+            <p class="text-3xl font-bold">감이 아닌 데이터로 훈련하는 곳, SN입니다.</p>
+        </div>
+    </div>
+
+    <!-- Navigation Overlay -->
+    <div class="fixed bottom-12 right-12 flex gap-4 z-50">
+        <div class="nav-btn" onclick="prevSlide()">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div class="nav-btn" onclick="nextSlide()">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+    </div>
+
+    <div class="progress-bar" id="progress"></div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+            const progressWidth = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progressWidth}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize progress bar
+        updateSlide();
+    </script>
+</body>
+</html>
