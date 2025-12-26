@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
+// 이미지 경로 헬퍼 (GitHub Pages 서브디렉토리 지원)
+const getImagePath = (path) => `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+
 // 체크 아이콘 컴포넌트
 const CheckIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -46,7 +49,7 @@ const slides = [
           <DecorativeCircles />
           <div style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
             <div style={{ width: 260, height: 260, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 60px rgba(45, 90, 71, 0.2)', overflow: 'hidden' }}>
-              <img src="/sn-logo.png" alt="SN" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
+              <img src={getImagePath('/sn-logo.png')} alt="SN" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
             </div>
           </div>
         </div>
@@ -61,7 +64,7 @@ const slides = [
       <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
         {/* 오른쪽 배경 이미지 */}
         <img
-          src="/leesedol1.png"
+          src={getImagePath('/leesedol1.png')}
           alt="이세돌 vs AlphaGo"
           className="img-grayscale"
           style={{
@@ -214,7 +217,7 @@ const slides = [
       <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
         {/* 왼쪽 배경 이미지 - 정답 생성기 */}
         <img
-          src="/capy_paste.jpg"
+          src={getImagePath('/capy_paste.jpg')}
           alt="Copy Paste"
           className="img-grayscale"
           style={{
@@ -228,7 +231,7 @@ const slides = [
         />
         {/* 오른쪽 배경 이미지 - 판단 훈련기 */}
         <img
-          src="/brain.jpg"
+          src={getImagePath('/brain.jpg')}
           alt="Brain"
           style={{
             position: 'absolute',
@@ -326,7 +329,7 @@ const slides = [
       <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
         {/* 오른쪽 오타니 이미지 */}
         <img
-          src="/otani.png"
+          src={getImagePath('/otani.png')}
           alt="Ohtani"
           style={{
             position: 'absolute',
@@ -430,7 +433,7 @@ const slides = [
         </div>
         <div className="split-right" style={{ background: 'var(--mint-light)', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
           <img
-            src="/student_stupid1.png"
+            src={getImagePath('/student_stupid1.png')}
             alt="눈을 가리고 시도하는 학생"
             style={{
               height: '80%',
@@ -704,7 +707,7 @@ const slides = [
         </div>
         <div style={{ position: 'absolute', bottom: '3rem', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
           <div style={{ width: 60, height: 60, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-            <img src="/sn-logo.png" alt="SN" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
+            <img src={getImagePath('/sn-logo.png')} alt="SN" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
           </div>
         </div>
       </div>
