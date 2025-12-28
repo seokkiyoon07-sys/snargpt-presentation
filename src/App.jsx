@@ -1273,19 +1273,52 @@ const Scene02Slide = () => {
     {
       title: '문제 풀기 @SNarGo',
       tags: ['#사고_로직_교정', '#SNarGo_순한맛_힌트'],
-      prompt: '이 문제 풀다가 막혔어. f(x)=x³-3ax²+b에서 극댓값이 4일 때 a+b 구하는 건데, 어디서부터 접근해야 할지 모르겠어. 답 말고 힌트만 줘.',
+      prompt: '이 문제 풀다가 막혔어. y=f⁻¹(x) 역함수 그래프랑 y=sx+1 직선이 만나는 점 개수 구하는 건데, m값에 따라 교점이 어떻게 달라지는지 모르겠어. 그래프 그려서 설명해줘.',
       response: (
         <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
-          <p style={{ marginBottom: '0.5rem' }}><strong>(SNarGo)</strong> 순한맛 힌트 드릴게요! 🌶️</p>
-          <div style={{ background: 'var(--mint-light)', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', marginBottom: '0.5rem', borderLeft: '3px solid var(--green-deep)' }}>
-            <p style={{ fontWeight: 600, color: 'var(--green-deep)', marginBottom: '0.25rem', fontSize: '0.75rem' }}>🔑 힌트 1단계</p>
-            <p style={{ fontSize: '0.7rem' }}>"극값이 존재한다"는 조건에서 f'(x)=0의 해가 어떤 성질을 가져야 할까요?</p>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNarGo)</strong> 그래프로 시각화해서 설명할게요! 📊</p>
+          {/* SVG 그래프 */}
+          <div style={{ background: 'white', borderRadius: '0.5rem', padding: '0.5rem', marginBottom: '0.75rem', border: '1px solid #e5e5e5' }}>
+            <svg width="100%" height="180" viewBox="-50 -50 300 200" style={{ display: 'block' }}>
+              {/* 축 */}
+              <line x1="0" y1="75" x2="250" y2="75" stroke="#ccc" strokeWidth="1" />
+              <line x1="100" y1="-30" x2="100" y2="150" stroke="#ccc" strokeWidth="1" />
+              {/* 축 라벨 */}
+              <text x="245" y="90" fontSize="10" fill="#666">x</text>
+              <text x="105" y="-20" fontSize="10" fill="#666">y</text>
+              {/* 원점 */}
+              <text x="90" y="88" fontSize="9" fill="#666">O</text>
+              {/* (1,0) 표시 */}
+              <circle cx="140" cy="75" r="3" fill="#333" />
+              <text x="135" y="95" fontSize="8" fill="#333">(1,0)</text>
+              {/* y = f⁻¹(x) 파란색 곡선 */}
+              <path d="M 20 130 Q 60 100 100 75 Q 140 50 180 30 Q 220 15 250 5" stroke="#3b82f6" strokeWidth="2.5" fill="none" />
+              {/* 직선들 - (0,1)을 지나는 다양한 기울기 */}
+              {/* y = -0.6x + 1 (회색) */}
+              <line x1="0" y1="35" x2="200" y2="95" stroke="#888" strokeWidth="1.5" />
+              {/* y = 0.5x + 1 (초록) */}
+              <line x1="0" y1="55" x2="250" y2="-7" stroke="#22c55e" strokeWidth="1.5" />
+              {/* y = 1.5x + 1 (주황) */}
+              <line x1="0" y1="55" x2="180" y2="-80" stroke="#f97316" strokeWidth="1.5" />
+              {/* y = 2.35x + 1 (빨강 - 접선) */}
+              <line x1="30" y1="90" x2="150" y2="-50" stroke="#ef4444" strokeWidth="2" />
+              {/* y = 3x + 1 (보라) */}
+              <line x1="50" y1="100" x2="130" y2="-40" stroke="#a855f7" strokeWidth="1.5" />
+              {/* (0,1) 점 */}
+              <circle cx="100" cy="55" r="3" fill="#333" />
+            </svg>
           </div>
-          <div style={{ background: '#f8f8f8', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', border: '1px solid #e5e5e5' }}>
-            <p style={{ fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.25rem', fontSize: '0.75rem' }}>🔒 힌트 2단계 (더 필요하면 요청)</p>
-            <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>판별식 D와 극댓값 조건을 연결해 보세요.</p>
+          {/* 범례 */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem', fontSize: '0.65rem' }}>
+            <span style={{ color: '#3b82f6', fontWeight: 600 }}>━ y=f⁻¹(x)</span>
+            <span style={{ color: '#ef4444', fontWeight: 600 }}>━ 접선 (m≈0.426)</span>
+            <span style={{ color: '#22c55e' }}>━ m=2</span>
+            <span style={{ color: '#f97316' }}>━ m=0.667</span>
           </div>
-          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>💡 답지를 보는 게 아니라, AI와 대화하며 내 뇌를 동기화하세요!</p>
+          <div style={{ background: 'var(--mint-light)', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', borderLeft: '3px solid var(--green-deep)' }}>
+            <p style={{ fontWeight: 600, color: 'var(--green-deep)', marginBottom: '0.25rem', fontSize: '0.75rem' }}>🔑 핵심 포인트</p>
+            <p style={{ fontSize: '0.7rem' }}>직선 y=sx+1은 모두 (0,1)을 지나요. 기울기 s가 커질수록 곡선과의 교점 개수가 변해요. 빨간 접선이 경계가 되는 m값이에요!</p>
+          </div>
         </div>
       ),
     },
@@ -1863,8 +1896,15 @@ const slides = [
         <div className="split-right" style={{ background: 'linear-gradient(135deg, var(--mint-light) 0%, var(--mint) 100%)' }}>
           <DecorativeCircles />
           <div style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-            <div style={{ width: 260, height: 260, background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 60px rgba(45, 90, 71, 0.2)', overflow: 'hidden' }}>
-              <img src={snLogo} alt="SN" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
+            <div className="logo-3d-container" style={{ position: 'relative' }}>
+              {/* Orbiting particles */}
+              <div className="logo-orbit-particle" />
+              <div className="logo-orbit-particle" />
+              <div className="logo-orbit-particle" />
+              {/* 3D Logo */}
+              <div className="logo-3d">
+                <img src={snLogo} alt="SN" />
+              </div>
             </div>
           </div>
         </div>
@@ -1970,7 +2010,7 @@ const slides = [
               <text x="35" y="190" fill="var(--text-muted)" fontSize="14" textAnchor="middle" transform="rotate(-90, 35, 190)">실력</text>
 
               {/* 시작점 */}
-              <circle cx="70" cy="220" r="8" fill="var(--green-deep)" />
+              <circle cx="70" cy="220" r="8" fill="var(--green-deep)" className="graph-point-start" />
 
               {/* 상위권 - 지수함수 개형 (급격히 상승) */}
               <path
@@ -1979,8 +2019,9 @@ const slides = [
                 strokeWidth="5"
                 fill="none"
                 strokeLinecap="round"
+                className="graph-line-upper"
               />
-              <circle cx="440" cy="30" r="8" fill="var(--green-deep)" />
+              <circle cx="440" cy="30" r="8" fill="var(--green-deep)" className="graph-point-upper" />
 
               {/* 하위권 - 로그함수 개형 (점점 낮아짐) */}
               <path
@@ -1989,21 +2030,24 @@ const slides = [
                 strokeWidth="5"
                 fill="none"
                 strokeLinecap="round"
+                className="graph-line-lower"
               />
-              <circle cx="440" cy="328" r="8" fill="var(--gray-warm)" />
+              <circle cx="440" cy="328" r="8" fill="var(--gray-warm)" className="graph-point-lower" />
 
               {/* 격차 표시 화살표 */}
-              <line x1="455" y1="50" x2="455" y2="310" stroke="var(--accent-teal)" strokeWidth="2" strokeDasharray="8,5" />
-              <polygon points="455,55 449,68 461,68" fill="var(--accent-teal)" />
-              <polygon points="455,305 449,292 461,292" fill="var(--accent-teal)" />
+              <g className="graph-gap-line">
+                <line x1="455" y1="30" x2="455" y2="328" stroke="var(--accent-teal)" strokeWidth="2" strokeDasharray="8,5" />
+                <polygon points="455,30 449,43 461,43" fill="var(--accent-teal)" />
+                <polygon points="455,328 449,315 461,315" fill="var(--accent-teal)" />
+              </g>
 
               {/* 라벨 */}
-              <text x="430" y="22" fill="var(--green-deep)" fontSize="16" fontWeight="700" textAnchor="end">상위권</text>
-              <text x="430" y="320" fill="var(--gray-warm)" fontSize="16" fontWeight="700" textAnchor="end">하위권</text>
+              <text x="430" y="22" fill="var(--green-deep)" fontSize="16" fontWeight="700" textAnchor="end" className="graph-label-upper">상위권</text>
+              <text x="430" y="320" fill="var(--gray-warm)" fontSize="16" fontWeight="700" textAnchor="end" className="graph-label-lower">하위권</text>
             </svg>
 
             {/* 격차 확대 라벨 */}
-            <div style={{
+            <div className="graph-gap-label" style={{
               position: 'absolute',
               right: -10,
               top: '50%',

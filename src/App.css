@@ -404,3 +404,278 @@ body {
 .slide-emphasis-bg .muted-text {
   color: rgba(255, 255, 255, 0.7);
 }
+
+/* 3D Logo Animation */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotateX(0deg) rotateY(-5deg);
+  }
+  75% {
+    transform: translateY(-15px) rotateX(-5deg) rotateY(3deg);
+  }
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    box-shadow:
+      0 20px 60px rgba(45, 90, 71, 0.3),
+      0 0 40px rgba(168, 213, 194, 0.3),
+      inset 0 -5px 20px rgba(45, 90, 71, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 30px 80px rgba(45, 90, 71, 0.4),
+      0 0 60px rgba(168, 213, 194, 0.5),
+      inset 0 -5px 30px rgba(45, 90, 71, 0.15);
+  }
+}
+
+@keyframes logoShine {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
+.logo-3d-container {
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-3d {
+  width: 260px;
+  height: 260px;
+  background: linear-gradient(145deg, #ffffff 0%, #f0f5f2 50%, #e8f0ec 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  animation:
+    logoFloat 6s ease-in-out infinite,
+    logoGlow 3s ease-in-out infinite;
+  border: 3px solid rgba(168, 213, 194, 0.5);
+}
+
+.logo-3d::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: logoShine 4s ease-in-out infinite;
+}
+
+.logo-3d::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 50%,
+    rgba(45, 90, 71, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.logo-3d img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(2px 4px 6px rgba(45, 90, 71, 0.2));
+}
+
+/* Orbiting particles around logo */
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(120deg) translateX(160px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(160px) rotate(-480deg); }
+}
+
+@keyframes orbit3 {
+  from { transform: rotate(240deg) translateX(140px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(140px) rotate(-600deg); }
+}
+
+.logo-orbit-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--mint) 0%, var(--green-deep) 100%);
+  box-shadow: 0 0 10px rgba(168, 213, 194, 0.6);
+}
+
+.logo-orbit-particle:nth-child(1) {
+  animation: orbit1 8s linear infinite;
+}
+
+.logo-orbit-particle:nth-child(2) {
+  animation: orbit2 10s linear infinite;
+  width: 8px;
+  height: 8px;
+}
+
+.logo-orbit-particle:nth-child(3) {
+  animation: orbit3 12s linear infinite;
+  width: 6px;
+  height: 6px;
+}
+
+/* Graph Line Drawing Animation */
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes simpleFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(45, 90, 71, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(45, 90, 71, 0.8));
+  }
+}
+
+@keyframes pulseGlowGray {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(107, 124, 116, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(107, 124, 116, 0.7));
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gapExpand {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.graph-line-upper {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-out 0.6s forwards, pulseGlow 2s ease-in-out infinite 2.6s;
+}
+
+.graph-line-lower {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-out 0.9s forwards, pulseGlowGray 2s ease-in-out infinite 2.9s;
+}
+
+.graph-point-start {
+  animation: bounceIn 0.5s ease-out forwards;
+}
+
+.graph-point-upper {
+  opacity: 0;
+  animation: simpleFadeIn 0.3s ease-out 2.6s forwards;
+}
+
+.graph-point-lower {
+  opacity: 0;
+  animation: simpleFadeIn 0.3s ease-out 2.9s forwards;
+}
+
+.graph-gap-line {
+  opacity: 0;
+  transform-origin: center;
+  animation: gapExpand 0.8s ease-out 3.2s forwards;
+}
+
+.graph-label-upper {
+  opacity: 0;
+  animation: simpleFadeIn 0.3s ease-out 2.6s forwards;
+}
+
+.graph-label-lower {
+  opacity: 0;
+  animation: simpleFadeIn 0.3s ease-out 2.9s forwards;
+}
+
+.graph-gap-label {
+  opacity: 0;
+  animation: fadeInScale 0.6s ease-out 3.2s forwards;
+}
