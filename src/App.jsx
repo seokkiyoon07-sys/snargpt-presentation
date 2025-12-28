@@ -35,6 +35,398 @@ const DecorativeCircles = () => (
   </>
 );
 
+// Scene 01: 계획 및 정보 탐색 (클릭 가능한 탭 UI)
+const Scene01Slide = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  // 테이블 스타일
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '0.7rem',
+    marginBottom: '0.75rem',
+  };
+  const thStyle = {
+    background: 'var(--mint-light)',
+    padding: '0.4rem 0.5rem',
+    textAlign: 'left',
+    borderBottom: '2px solid var(--mint-dark)',
+    fontWeight: 600,
+    color: 'var(--green-deep)',
+  };
+  const tdStyle = {
+    padding: '0.4rem 0.5rem',
+    borderBottom: '1px solid #e5e5e5',
+    verticalAlign: 'top',
+  };
+  const sectionTitleStyle = {
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    color: 'var(--green-deep)',
+    marginBottom: '0.5rem',
+    marginTop: '0.75rem',
+  };
+
+  const prompts = [
+    {
+      title: '수학 인강 강사',
+      subtitle: '나에게 맞는 강사 찾기',
+      prompt: `수학 인강 강사를 고르려고 해.
+
+중요한 건
+'누가 유명한지'가 아니라,
+내 사고 스타일에 맞는지를 알고 싶어.
+
+그래서 다음 기준으로 설명해줘.
+
+• 개념 설명이 강한 강사 vs 문제 접근이 강한 강사
+• 풀이를 많이 보여주는 강사 vs 사고 과정을 강조하는 강사
+• 진도를 빠르게 나가는 커리큘럼 vs 반복 훈련형 커리큘럼
+
+각 유형이 어떤 학생에게 맞고,
+어떤 학생에게는 위험한지도 함께 말해줘.
+메가, 대성, 시대인재 1,2,3,4 타 모두 알려줘.`,
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.5 }}>
+          <p style={{ marginBottom: '0.75rem' }}>스엔 학생! 수학 1타부터 4타급 강사들을 3가지 기준으로 비교 분석해 드릴게요.</p>
+
+          <p style={sectionTitleStyle}>📊 1. 메가스터디</p>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>강사</th>
+                <th style={thStyle}>스타일</th>
+                <th style={thStyle}>추천 학생</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style={tdStyle}><strong>현우진</strong> (1타)</td><td style={tdStyle}>문제 접근 / 다각도 / 고밀도</td><td style={tdStyle}>감각이 좋고 양치기를 견딜 수 있는 상위권</td></tr>
+              <tr><td style={tdStyle}><strong>양승진</strong> (2타)</td><td style={tdStyle}>개념 / 단일 사고 / 단계적</td><td style={tdStyle}>실전에서 당황하는 학생</td></tr>
+              <tr><td style={tdStyle}><strong>김기현</strong> (3타)</td><td style={tdStyle}>개념 / 단일 사고 / 반복</td><td style={tdStyle}>기초 보완 중하위권</td></tr>
+              <tr><td style={tdStyle}><strong>김성은</strong> (4타)</td><td style={tdStyle}>개념 / 반복 훈련</td><td style={tdStyle}>수포자 탈출 희망생</td></tr>
+            </tbody>
+          </table>
+
+          <p style={sectionTitleStyle}>📊 2. 대성마이맥</p>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>강사</th>
+                <th style={thStyle}>스타일</th>
+                <th style={thStyle}>추천 학생</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style={tdStyle}><strong>한석원</strong> (1타)</td><td style={tdStyle}>개념 본질 / 단일 사고 / 반복</td><td style={tdStyle}>"왜?"가 중요한 논리파</td></tr>
+              <tr><td style={tdStyle}><strong>배성민</strong> (2타)</td><td style={tdStyle}>문제 접근 / 다각도 / 고밀도</td><td style={tdStyle}>시간 단축이 필요한 학생</td></tr>
+              <tr><td style={tdStyle}><strong>정상모</strong> (3타)</td><td style={tdStyle}>개념+문제 / 단일 사고 / 단계적</td><td style={tdStyle}>전형적 풀이 선호 중상위권</td></tr>
+              <tr><td style={tdStyle}><strong>이창무</strong> (4타)</td><td style={tdStyle}>문제 접근 심화 / 다각도 / 고밀도</td><td style={tdStyle}>100점 지향 최상위권</td></tr>
+            </tbody>
+          </table>
+
+          <p style={sectionTitleStyle}>📊 3. 시대인재</p>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>강사</th>
+                <th style={thStyle}>스타일</th>
+                <th style={thStyle}>추천 학생</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style={tdStyle}><strong>강기원</strong> (1타급)</td><td style={tdStyle}>구조적 논리 / 단일 사고 / 고밀도</td><td style={tdStyle}>논리적 완결성 선호</td></tr>
+              <tr><td style={tdStyle}><strong>김현우</strong> (2타급)</td><td style={tdStyle}>시각화 / 다각도 / 고밀도</td><td style={tdStyle}>그래프 직관이 뛰어난 학생</td></tr>
+              <tr><td style={tdStyle}><strong>박종민</strong> (3타급)</td><td style={tdStyle}>개념+문제 / 단일 사고 / 단계적</td><td style={tdStyle}>차근차근 배우고 싶은 학생</td></tr>
+              <tr><td style={tdStyle}><strong>이동준</strong> (4타급)</td><td style={tdStyle}>조건 해석 / 다각도 / 고밀도</td><td style={tdStyle}>조건 분석 연습 필요 상위권</td></tr>
+            </tbody>
+          </table>
+        </div>
+      ),
+    },
+    {
+      title: '수학 학습 설계',
+      subtitle: '나만의 커리큘럼 만들기',
+      prompt: `너는 대한민국 수능 수학 교육 전문가이자 입시 전략가야. 나의 현재 상태를 바탕으로, 수능까지 흔들리지 않는 [수학 완벽 정복 커리큘럼]을 짜줘.
+
+1. 나의 현재 상태 (Diagnosis)
+• 현재 등급/백분위: 3등급 / 82%
+• 가장 자신 있는 단원: 수II 미분법
+• 가장 취약한 단원: 수I 삼각함수, 확률과 통계
+• 나의 사고 스타일: 개념 이해는 빠르나 실전 적용이 늦음
+
+2. 학습 목표 및 가용 시간 (Goal & Time)
+• 목표 등급: 안정적인 1등급
+• 하루 수학 공부 가능 시간: 평일 4시간, 주말 8시간
+• 현재 수강 중인 인강/교재: 현우진 뉴런, 쎈, 기출의 미래
+
+3. 요청 사항 (Output Format)
+• [Phase 1] 취약 단원 보완을 위한 구체적인 복습 방법과 기간
+• [Phase 2] 기출 분석 시 '한 문제당 몇 분', 'N회독' 방식
+• [Phase 3] 킬러 문항 대비 시점과 실전 모의고사 활용법
+• [Special] SNarGo, SNARVIS 활용 가이드
+
+단순히 열심히 하라는 말이 아니라, 주차별/일차별로 내가 당장 내일부터 실행할 수 있는 '행동 강령' 위주로 짜줘!`,
+      response: `(SNARVIS) SNARVIS 입니다.
+
+반가워요, 스엔 학생! 현우진 선생님의 '실전 개념(뉴런) - 문제 풀이(드릴) - 실전 모의고사(킬링캠프)' 흐름에 SNarGPT의 기능을 완벽하게 결합한 로드맵입니다.
+
+📋 스엔 학생을 위한 '현우진 커리큘럼' 최적화 로드맵
+
+🔹 Phase 1: [계획] 뉴런 실전 개념의 완벽한 구조화
+• 목표: 현우진의 '도구'를 문제에 즉각 반응하는 '반사 신경' 구축
+• SNARVIS 활용: "현우진 선생님이 설명한 '삼차함수의 비율 관계'가 실제 기출문제에서 어떻게 변형되어 나오는지 유사 사례 3개만 찾아줘"
+
+🔹 Phase 2: [훈련] 드릴 & 시냅스 고난도 정복
+• 자력 풀이: 한 문제당 20분은 스스로 고민
+• SNarGo 호출: "현우진 선생님의 방식대로 '기하적 직관'을 먼저 사용해서 풀 수 있는 힌트를 줘"
+• SNarGen 변형: "이 문제의 조건을 조금 더 꼬아서 새로운 문제를 만들어 줘"
+
+🔹 Phase 3: [분석] 킬링캠프 및 오답 디코딩
+• 실전 시뮬레이션: 매주 일요일, 실제 수능 시간과 동일하게 응시
+• 비밀노트 기록: 틀린 이유 분석 (도구 부재 / 잘못된 선택 / 계산 실수)
+• 멘탈 케어: 점수가 낮아도 성장 과정으로 인식, 보완 우선순위 재설정
+
+💡 SNarGPT 전문가 한마디
+• SNarGo: "현우진 선생님 풀이 밑바닥의 탄탄한 논리, 제가 징검다리 놓아줄게요"
+• SNarGen: "뉴런에서 배운 개념, 변형 문제로 테스트해 볼래요?"
+• SNARVIS: "우리는 반드시 승리합니다! 🌟"`,
+    },
+    {
+      title: '월간/주간 계획',
+      subtitle: '수능까지의 로드맵',
+      prompt: `너는 수능 수학 1등급 제조기이자 최고의 입시 컨설턴트야. 내가 수능 당일까지 지치지 않고 완주할 수 있도록 [월간/주간 맞춤형 학습 로드맵]을 설계해 줘.
+
+1. 현재 나의 위치 (Current Status)
+• 목표: 수능 수학 안정적 1등급 / 의대 지망
+• 현재 수준: 6월 모의고사 3등급(78점), 수II 미분 킬러 문항 취약
+• 주요 교재/인강: 현우진 뉴런 & 드릴, 기출의 미래
+
+2. 월간 거시 전략 (Monthly Milestone)
+• 달별로 [개념 체화 - 기출 분석 - N제 정복 - 실전 모의고사] 비중 설정
+• 각 달마다 '필수 과업(Must-Do)' 3가지씩 제시
+
+3. 주간 미시 실행 (Weekly Action Plan)
+• [월~금]: 인강 수강, 복습, 기출 풀이의 황금 비율
+• [토~일]: 주간 오답 정리 및 취약 단원 집중 보완
+
+4. SNarGPT 전문가 활용 지침
+• SNarGo: 고난도 문제 사고 과정 교정 타이밍
+• SNarGen: 부족한 단원 변형 문제 요청 방법
+• SNARVIS: 계획이 밀리거나 멘탈이 흔들릴 때 피드백
+
+당장 이번 주 월요일부터 실행할 수 있는 '행동 중심'의 답변을 원해!`,
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNARVIS)</strong> SNARVIS 입니다.</p>
+          <p style={{ marginBottom: '0.75rem' }}>스엔 학생! PPT의 대미를 장식할 <strong>'월간/주간 계획 설계의 실제 AI 답변 예시'</strong>를 준비했습니다. 현우진 선생님의 커리큘럼을 타는 스엔 학생이 이 프롬프트를 사용했을 때, 얼마나 체계적이고 실전적인 가이드를 받을 수 있는지 보여주는 완벽한 샘플이 될 거예요.</p>
+
+          <p style={{ marginBottom: '0.5rem', fontWeight: 600, color: 'var(--green-deep)' }}>📋 스엔 학생을 위한 수능 수학 '승리 로드맵'</p>
+          <p style={{ marginBottom: '0.75rem', fontStyle: 'italic' }}>"안녕하세요, 스엔 학생! 현우진 선생님의 '드릴'과 '킬캠'을 무기로 수능 정상을 향해 달리는 여정, 저 SNARVIS가 가장 효율적인 경로로 안내할게요. 🚀"</p>
+          <p style={{ marginBottom: '0.75rem' }}>현재 3등급에서 고정 1등급으로 가기 위해선, <strong>'아는 것의 완벽한 체화'</strong>와 <strong>'낯선 조건에 대한 대응력'</strong>이 핵심입니다.</p>
+
+          <p style={{ marginTop: '1rem', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--green-deep)' }}>1. 월간 거시 전략 (Monthly Milestones)</p>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.7rem', marginBottom: '0.75rem' }}>
+            <thead>
+              <tr>
+                <th style={{ background: 'var(--mint-light)', padding: '0.4rem 0.5rem', textAlign: 'left', borderBottom: '2px solid var(--mint-dark)', fontWeight: 600, color: 'var(--green-deep)' }}>시기</th>
+                <th style={{ background: 'var(--mint-light)', padding: '0.4rem 0.5rem', textAlign: 'left', borderBottom: '2px solid var(--mint-dark)', fontWeight: 600, color: 'var(--green-deep)' }}>핵심 테마</th>
+                <th style={{ background: 'var(--mint-light)', padding: '0.4rem 0.5rem', textAlign: 'left', borderBottom: '2px solid var(--mint-dark)', fontWeight: 600, color: 'var(--green-deep)' }}>필수 과업 (Must-Do)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top' }}><strong>8~9월</strong></td>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top' }}>N제 정복 & 약점 타격</td>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top', fontSize: '0.65rem' }}>1. '드릴' 전 문항 2회독<br/>2. 9평 완벽 분석<br/>3. 취약 단원 SNarGen 변형 50개</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top' }}><strong>10월</strong></td>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top' }}>실전 감각 & 시간 관리</td>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top', fontSize: '0.65rem' }}>1. '킬캠' 주 2회 응시<br/>2. 오답 중 '발상' 막힌 문항 아카이빙<br/>3. '선구안' 훈련</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top' }}><strong>11월</strong></td>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top' }}>최종 점검 & 마인드셋</td>
+                <td style={{ padding: '0.4rem 0.5rem', borderBottom: '1px solid #e5e5e5', verticalAlign: 'top', fontSize: '0.65rem' }}>1. '뉴런' 핵심 도구 단권화<br/>2. 최근 3개년 기출 복습<br/>3. 생체 리듬 & 멘탈 관리</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p style={{ marginTop: '1rem', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--green-deep)' }}>2. 주간 미시 실행 (Weekly Action Plan)</p>
+          <p style={{ marginBottom: '0.3rem', fontWeight: 600 }}>[월~금] 루틴 (Daily 4시간):</p>
+          <ul style={{ margin: '0 0 0.5rem 1rem', padding: 0, fontSize: '0.7rem' }}>
+            <li>14:00~15:30: 현우진 '드릴' 수강 및 당일 복습</li>
+            <li>15:30~17:30: 기출/N제 자력 풀이 (한 문제당 최대 20분)</li>
+            <li>17:30~18:00: SNarGo 타임! 막혔던 문제 질문하기</li>
+          </ul>
+          <p style={{ marginBottom: '0.3rem', fontWeight: 600 }}>[토요일] 실전 Day:</p>
+          <ul style={{ margin: '0 0 0.5rem 1rem', padding: 0, fontSize: '0.7rem' }}>
+            <li>10:30~12:10: 실전 모의고사 응시 (수능 시간표와 동일)</li>
+            <li>오후: 채점 후 '이유 있는 오답' 분류 및 해설 강의</li>
+          </ul>
+          <p style={{ marginBottom: '0.3rem', fontWeight: 600 }}>[일요일] 피드백 & 보강:</p>
+          <ul style={{ margin: '0 0 0.75rem 1rem', padding: 0, fontSize: '0.7rem' }}>
+            <li>오전: 오답 중 핵심 아이디어 비밀노트 저장</li>
+            <li>오후: SNarGen에게 변형 문제 요청하여 집중 훈련</li>
+          </ul>
+
+          <p style={{ marginTop: '1rem', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--green-deep)' }}>3. SNarGPT 전문가 활용 지침</p>
+          <ul style={{ margin: '0 0 0.5rem 1rem', padding: 0, fontSize: '0.7rem' }}>
+            <li><strong>SNarGo:</strong> "드릴 문제에서 '기하적 해석'이 안 보일 땐 저를 부르세요. 순한 맛 힌트를 드릴게요."</li>
+            <li><strong>SNarGen:</strong> "특정 유형에 무너졌나요? '맞춤형 훈련장'을 즉석에서 만들어 드릴게요."</li>
+            <li><strong>SNARVIS:</strong> "'오늘 2시간밖에 못 하는데 우선순위 정해줘'라고 하세요. 가장 효율적인 대안을 찾아낼게요."</li>
+          </ul>
+        </div>
+      ),
+    },
+    {
+      title: 'SN독학기숙학원 정보',
+      subtitle: '학원 정보 검색',
+      prompt: ['2027학년도 SN독학기숙학원 학사일정 sn블로그에서 확인해줘', '오늘 점심 메뉴 뭐야?'],
+      response: '',
+    },
+  ];
+
+  return (
+    <div className="split-layout">
+      <div className="split-left">
+        <span className="tag" style={{ marginBottom: '1.5rem' }}>Scene 01</span>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '2rem' }}>
+          계획 및<br />
+          <span className="accent-text">정보 탐색</span>
+        </h2>
+        <div className="divider" style={{ marginBottom: '2rem' }} />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {prompts.map((item, index) => (
+            <div
+              key={index}
+              className="timeline-item"
+              onClick={(e) => { e.stopPropagation(); setActiveTab(index); }}
+              style={{ cursor: 'pointer' }}
+            >
+              <div
+                className="timeline-dot"
+                style={{
+                  background: activeTab === index ? 'var(--mint-dark)' : 'var(--mint)',
+                  transform: activeTab === index ? 'scale(1.3)' : 'scale(1)',
+                  transition: 'all 0.2s ease',
+                }}
+              />
+              <div>
+                <p style={{
+                  fontWeight: 600,
+                  marginBottom: '0.25rem',
+                  color: activeTab === index ? 'var(--green-deep)' : 'var(--text-dark)',
+                  transition: 'color 0.2s ease',
+                }}>
+                  {item.title}
+                </p>
+                <p className="muted-text" style={{ fontSize: '0.875rem' }}>{item.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="split-right" style={{ background: 'var(--mint-light)', padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{
+          width: '95%',
+          height: '90%',
+          background: '#ffffff',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #e5e5e5',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}>
+          {/* Header */}
+          <div style={{
+            padding: '1rem 1.5rem',
+            borderBottom: '1px solid #e5e5e5',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            background: '#fafafa',
+          }}>
+            <div style={{ width: 36, height: 36, background: 'var(--green-deep)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 700, color: 'white' }}>SN</span>
+            </div>
+            <div>
+              <p style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '0.95rem', margin: 0 }}>SNarGPT</p>
+              <p style={{ color: '#6b6b6b', fontSize: '0.75rem', margin: 0 }}>AI Learning Assistant</p>
+            </div>
+          </div>
+
+          {/* Chat Area */}
+          <div style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', background: '#ffffff' }}>
+            {/* User Message(s) */}
+            {Array.isArray(prompts[activeTab].prompt) ? (
+              prompts[activeTab].prompt.map((msg, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexDirection: 'row-reverse' }}>
+                  <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.8rem' }}>👤</span>
+                  </div>
+                  <div style={{ background: '#f4f4f4', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%' }}>
+                    <p style={{ color: '#1a1a1a', fontSize: '0.85rem', margin: 0, lineHeight: 1.6, fontWeight: 400 }}>
+                      {msg}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexDirection: 'row-reverse' }}>
+                <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: '0.8rem' }}>👤</span>
+                </div>
+                <div style={{ background: '#f4f4f4', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%' }}>
+                  <p style={{ color: '#1a1a1a', fontSize: '0.85rem', margin: 0, lineHeight: 1.6, fontWeight: 400, whiteSpace: 'pre-line' }}>
+                    {prompts[activeTab].prompt}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* AI Response */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 28, height: 28, background: 'var(--green-deep)', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'white' }}>SN</span>
+              </div>
+              <div style={{ background: '#ffffff', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%', border: '1px solid #e5e5e5' }}>
+                {typeof prompts[activeTab].response === 'string' ? (
+                  <p style={{ color: '#1a1a1a', fontSize: '0.8rem', margin: 0, lineHeight: 1.6, fontWeight: 400, whiteSpace: 'pre-line' }}>
+                    {prompts[activeTab].response}
+                  </p>
+                ) : (
+                  prompts[activeTab].response
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Input Area */}
+          <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid #e5e5e5', background: '#fafafa' }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '1.5rem',
+              padding: '0.75rem 1rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              border: '1px solid #e5e5e5',
+            }}>
+              <span style={{ color: '#9a9a9a', fontSize: '0.9rem', flex: 1 }}>메시지를 입력하세요...</span>
+              <div style={{ width: 32, height: 32, background: '#1a1a1a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                <span style={{ fontSize: '0.9rem', color: 'white' }}>↑</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Slide 4: 핵심 질문 컴포넌트 (클릭 시 텍스트 변경)
 const CoreQuestionSlide = () => {
   const [clicked, setClicked] = useState(false);
@@ -795,6 +1187,340 @@ const QnASlideItem = ({ example, index, total }) => {
   );
 };
 
+// Scene 02: 훈련 (4개 탭)
+const Scene02Slide = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const prompts = [
+    {
+      title: '탭 1 제목',
+      subtitle: '탭 1 부제목',
+      prompt: '탭 1 프롬프트 예시',
+      response: '탭 1 응답 예시',
+    },
+    {
+      title: '탭 2 제목',
+      subtitle: '탭 2 부제목',
+      prompt: '탭 2 프롬프트 예시',
+      response: '탭 2 응답 예시',
+    },
+    {
+      title: '탭 3 제목',
+      subtitle: '탭 3 부제목',
+      prompt: '탭 3 프롬프트 예시',
+      response: '탭 3 응답 예시',
+    },
+    {
+      title: '탭 4 제목',
+      subtitle: '탭 4 부제목',
+      prompt: '탭 4 프롬프트 예시',
+      response: '탭 4 응답 예시',
+    },
+  ];
+
+  return (
+    <div className="split-layout">
+      <div className="split-left">
+        <span className="tag" style={{ marginBottom: '1.5rem' }}>Scene 02</span>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '2rem' }}>
+          <span className="accent-text">훈련</span>
+        </h2>
+        <div className="divider" style={{ marginBottom: '2rem' }} />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {prompts.map((item, index) => (
+            <div
+              key={index}
+              className="timeline-item"
+              onClick={(e) => { e.stopPropagation(); setActiveTab(index); }}
+              style={{ cursor: 'pointer' }}
+            >
+              <div
+                className="timeline-dot"
+                style={{
+                  background: activeTab === index ? 'var(--mint-dark)' : 'var(--mint)',
+                  transform: activeTab === index ? 'scale(1.3)' : 'scale(1)',
+                  transition: 'all 0.2s ease',
+                }}
+              />
+              <div>
+                <p style={{
+                  fontWeight: 600,
+                  marginBottom: '0.25rem',
+                  color: activeTab === index ? 'var(--green-deep)' : 'var(--text-dark)',
+                  transition: 'color 0.2s ease',
+                }}>
+                  {item.title}
+                </p>
+                <p className="muted-text" style={{ fontSize: '0.875rem' }}>{item.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="split-right" style={{ background: 'var(--mint-light)', padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{
+          width: '95%',
+          height: '90%',
+          background: '#ffffff',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #e5e5e5',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}>
+          {/* Header */}
+          <div style={{
+            padding: '1rem 1.5rem',
+            borderBottom: '1px solid #e5e5e5',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            background: '#fafafa',
+          }}>
+            <div style={{ width: 36, height: 36, background: 'var(--green-deep)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 700, color: 'white' }}>SN</span>
+            </div>
+            <div>
+              <p style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '0.95rem', margin: 0 }}>SNarGPT</p>
+              <p style={{ color: '#6b6b6b', fontSize: '0.75rem', margin: 0 }}>AI Learning Assistant</p>
+            </div>
+          </div>
+
+          {/* Chat Area */}
+          <div style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', background: '#ffffff' }}>
+            {/* User Message(s) */}
+            {Array.isArray(prompts[activeTab].prompt) ? (
+              prompts[activeTab].prompt.map((msg, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexDirection: 'row-reverse' }}>
+                  <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.8rem' }}>👤</span>
+                  </div>
+                  <div style={{ background: '#f4f4f4', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%' }}>
+                    <p style={{ color: '#1a1a1a', fontSize: '0.85rem', margin: 0, lineHeight: 1.6, fontWeight: 400 }}>
+                      {msg}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexDirection: 'row-reverse' }}>
+                <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: '0.8rem' }}>👤</span>
+                </div>
+                <div style={{ background: '#f4f4f4', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%' }}>
+                  <p style={{ color: '#1a1a1a', fontSize: '0.85rem', margin: 0, lineHeight: 1.6, fontWeight: 400, whiteSpace: 'pre-line' }}>
+                    {prompts[activeTab].prompt}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* AI Response */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 28, height: 28, background: 'var(--green-deep)', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'white' }}>SN</span>
+              </div>
+              <div style={{ background: '#ffffff', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%', border: '1px solid #e5e5e5' }}>
+                {typeof prompts[activeTab].response === 'string' ? (
+                  <p style={{ color: '#1a1a1a', fontSize: '0.8rem', margin: 0, lineHeight: 1.6, fontWeight: 400, whiteSpace: 'pre-line' }}>
+                    {prompts[activeTab].response}
+                  </p>
+                ) : (
+                  prompts[activeTab].response
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Input Area */}
+          <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid #e5e5e5', background: '#fafafa' }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '1.5rem',
+              padding: '0.75rem 1rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              border: '1px solid #e5e5e5',
+            }}>
+              <span style={{ color: '#9a9a9a', fontSize: '0.9rem', flex: 1 }}>메시지를 입력하세요...</span>
+              <div style={{ width: 32, height: 32, background: '#1a1a1a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                <span style={{ color: 'white', fontSize: '0.9rem' }}>➤</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Scene 03: 분석 (3개 탭)
+const Scene03Slide = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const prompts = [
+    {
+      title: '탭 1 제목',
+      subtitle: '탭 1 부제목',
+      prompt: '탭 1 프롬프트 예시',
+      response: '탭 1 응답 예시',
+    },
+    {
+      title: '탭 2 제목',
+      subtitle: '탭 2 부제목',
+      prompt: '탭 2 프롬프트 예시',
+      response: '탭 2 응답 예시',
+    },
+    {
+      title: '탭 3 제목',
+      subtitle: '탭 3 부제목',
+      prompt: '탭 3 프롬프트 예시',
+      response: '탭 3 응답 예시',
+    },
+  ];
+
+  return (
+    <div className="split-layout">
+      <div className="split-left">
+        <span className="tag" style={{ marginBottom: '1.5rem' }}>Scene 03</span>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '2rem' }}>
+          <span className="accent-text">분석</span>
+        </h2>
+        <div className="divider" style={{ marginBottom: '2rem' }} />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {prompts.map((item, index) => (
+            <div
+              key={index}
+              className="timeline-item"
+              onClick={(e) => { e.stopPropagation(); setActiveTab(index); }}
+              style={{ cursor: 'pointer' }}
+            >
+              <div
+                className="timeline-dot"
+                style={{
+                  background: activeTab === index ? 'var(--mint-dark)' : 'var(--mint)',
+                  transform: activeTab === index ? 'scale(1.3)' : 'scale(1)',
+                  transition: 'all 0.2s ease',
+                }}
+              />
+              <div>
+                <p style={{
+                  fontWeight: 600,
+                  marginBottom: '0.25rem',
+                  color: activeTab === index ? 'var(--green-deep)' : 'var(--text-dark)',
+                  transition: 'color 0.2s ease',
+                }}>
+                  {item.title}
+                </p>
+                <p className="muted-text" style={{ fontSize: '0.875rem' }}>{item.subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="split-right" style={{ background: 'var(--mint-light)', padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{
+          width: '95%',
+          height: '90%',
+          background: '#ffffff',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #e5e5e5',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}>
+          {/* Header */}
+          <div style={{
+            padding: '1rem 1.5rem',
+            borderBottom: '1px solid #e5e5e5',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            background: '#fafafa',
+          }}>
+            <div style={{ width: 36, height: 36, background: 'var(--green-deep)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 700, color: 'white' }}>SN</span>
+            </div>
+            <div>
+              <p style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '0.95rem', margin: 0 }}>SNarGPT</p>
+              <p style={{ color: '#6b6b6b', fontSize: '0.75rem', margin: 0 }}>AI Learning Assistant</p>
+            </div>
+          </div>
+
+          {/* Chat Area */}
+          <div style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', background: '#ffffff' }}>
+            {/* User Message(s) */}
+            {Array.isArray(prompts[activeTab].prompt) ? (
+              prompts[activeTab].prompt.map((msg, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexDirection: 'row-reverse' }}>
+                  <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.8rem' }}>👤</span>
+                  </div>
+                  <div style={{ background: '#f4f4f4', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%' }}>
+                    <p style={{ color: '#1a1a1a', fontSize: '0.85rem', margin: 0, lineHeight: 1.6, fontWeight: 400 }}>
+                      {msg}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', flexDirection: 'row-reverse' }}>
+                <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: '0.8rem' }}>👤</span>
+                </div>
+                <div style={{ background: '#f4f4f4', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%' }}>
+                  <p style={{ color: '#1a1a1a', fontSize: '0.85rem', margin: 0, lineHeight: 1.6, fontWeight: 400, whiteSpace: 'pre-line' }}>
+                    {prompts[activeTab].prompt}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* AI Response */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 28, height: 28, background: 'var(--green-deep)', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'white' }}>SN</span>
+              </div>
+              <div style={{ background: '#ffffff', borderRadius: '1rem', padding: '0.875rem 1rem', maxWidth: '85%', border: '1px solid #e5e5e5' }}>
+                {typeof prompts[activeTab].response === 'string' ? (
+                  <p style={{ color: '#1a1a1a', fontSize: '0.8rem', margin: 0, lineHeight: 1.6, fontWeight: 400, whiteSpace: 'pre-line' }}>
+                    {prompts[activeTab].response}
+                  </p>
+                ) : (
+                  prompts[activeTab].response
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Input Area */}
+          <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid #e5e5e5', background: '#fafafa' }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '1.5rem',
+              padding: '0.75rem 1rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              border: '1px solid #e5e5e5',
+            }}>
+              <span style={{ color: '#9a9a9a', fontSize: '0.9rem', flex: 1 }}>메시지를 입력하세요...</span>
+              <div style={{ width: 32, height: 32, background: '#1a1a1a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                <span style={{ color: 'white', fontSize: '0.9rem' }}>➤</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const slides = [
   // Slide 0: Title - 매거진 스타일 타이틀
   {
@@ -1185,159 +1911,22 @@ const slides = [
     ),
   },
 
-  // Slide 9: Scene 1 - 타임라인 스타일
+  // Slide 9: Scene 1 - 계획 및 정보 탐색
   {
     id: 9,
-    content: (
-      <div className="split-layout">
-        <div className="split-left">
-          <span className="tag" style={{ marginBottom: '1.5rem' }}>Scene 01</span>
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '2rem' }}>
-            '점'의 공부를<br />
-            <span className="accent-text">'선'의 훈련</span>으로
-          </h2>
-          <div className="divider" style={{ marginBottom: '2rem' }} />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-line" />
-              <div>
-                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>문제 검색</p>
-                <p className="muted-text" style={{ fontSize: '0.875rem' }}>원하는 문제를 광속으로 찾기</p>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-line" />
-              <div>
-                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>유사 문제 연결</p>
-                <p className="muted-text" style={{ fontSize: '0.875rem' }}>관련 문제들을 연결하여 패턴 파악</p>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div className="timeline-line" />
-              <div>
-                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>판단 로직 검증</p>
-                <p className="muted-text" style={{ fontSize: '0.875rem' }}>사고 과정의 오류 지점 분석</p>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot" />
-              <div>
-                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>조건 변형 훈련</p>
-                <p className="muted-text" style={{ fontSize: '0.875rem' }}>다양한 조건에서의 적용력 강화</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="split-right" style={{ background: 'var(--mint-light)', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <iframe
-            src="https://snargpt.ai"
-            title="SNarGPT"
-            style={{
-              width: '95%',
-              height: '90%',
-              border: '2px solid var(--mint)',
-              borderRadius: '1rem',
-              boxShadow: '0 8px 32px rgba(45, 90, 71, 0.15)',
-            }}
-          />
-        </div>
-      </div>
-    ),
+    content: <Scene01Slide />,
   },
 
-  // Slide 10: Scene 2
+  // Slide 10: Scene 2 - 계획
   {
     id: 10,
-    content: (
-      <div className="split-layout">
-        <div className="split-left">
-          <span className="tag" style={{ marginBottom: '1.5rem' }}>Scene 02</span>
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '2rem' }}>
-            지식의 <span className="accent-text">해상도</span>를<br />
-            나에게 맞추다
-          </h2>
-          <div className="divider" style={{ marginBottom: '2rem' }} />
-          <p className="muted-text" style={{ fontSize: '1.125rem' }}>
-            지식의 양이 아닙니다.<br />
-            <strong style={{ color: 'var(--text-dark)' }}>정확한 초점</strong>이 중요합니다.
-          </p>
-        </div>
-        <div className="split-right" style={{ padding: '3rem', flexDirection: 'column', gap: '1.5rem', alignItems: 'stretch' }}>
-          <div className="card card-mint">
-            <p style={{ fontSize: '0.75rem', color: 'var(--accent-teal)', fontWeight: 600, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>나의 요청</p>
-            <p style={{ fontSize: '1.125rem', fontWeight: 500 }}>
-              "지금 이 문제를 푸는 데 <span style={{ textDecoration: 'underline', textDecorationColor: 'var(--mint-dark)' }}>딱 필요한 만큼만</span> 알려줘"
-            </p>
-          </div>
-          <div className="card card-mint">
-            <p style={{ fontSize: '0.75rem', color: 'var(--accent-teal)', fontWeight: 600, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>나의 요청</p>
-            <p style={{ fontSize: '1.125rem', fontWeight: 500 }}>
-              "수능 범위 안에서만 이 개념의 이유를 설명해줘"
-            </p>
-          </div>
-        </div>
-      </div>
-    ),
+    content: <Scene02Slide />,
   },
 
-  // Slide 11: Scene 3 - AI 코치 대결
+  // Slide 11: Scene 3 - 분석
   {
     id: 11,
-    content: (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '4rem 5rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span className="tag" style={{ marginBottom: '1rem' }}>Scene 03</span>
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 700 }}>
-            사고를 충돌시켜 <span className="accent-text">기준을 세우다</span>
-          </h2>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '2rem', alignItems: 'center', maxWidth: 900, margin: '0 auto 2rem' }}>
-          <div className="card" style={{ borderTop: '4px solid var(--mint-dark)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <div style={{ width: 40, height: 40, background: 'var(--mint-light)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: 'var(--green-deep)' }}>A</div>
-              <div>
-                <span style={{ fontWeight: 600, color: 'var(--accent-teal)' }}>AI Coach A</span>
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>스나비스</p>
-              </div>
-            </div>
-            <p style={{ fontSize: '1.125rem' }}>"이 문제를 정석대로 풀어줘."</p>
-          </div>
-
-          <div className="vs-badge">VS</div>
-
-          <div className="card" style={{ borderTop: '4px solid var(--green-deep)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <div style={{ width: 40, height: 40, background: 'var(--green-deep)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: 'white' }}>B</div>
-              <div>
-                <span style={{ fontWeight: 600, color: 'var(--green-deep)' }}>AI Coach B</span>
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>스나겐</p>
-              </div>
-            </div>
-            <p style={{ fontSize: '1.125rem' }}>"이 문제를 그래프를 활용해서 풀어줘."</p>
-          </div>
-        </div>
-
-        <div style={{ textAlign: 'center' }}>
-          <div className="card card-mint" style={{ display: 'inline-block', padding: '1.5rem 2.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-              <div style={{ width: 40, height: 40, background: 'var(--green-deep)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: 'white' }}>C</div>
-              <div style={{ textAlign: 'left' }}>
-                <span style={{ fontWeight: 600, color: 'var(--green-deep)' }}>AI Coach C</span>
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>스나고</p>
-              </div>
-            </div>
-            <p style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--green-deep)' }}>
-              "둘 중에 어떤 문제 풀이가 더 깔끔한지 판단해줘."
-            </p>
-          </div>
-        </div>
-      </div>
-    ),
+    content: <Scene03Slide />,
   },
 
   // Slide 12: 시스템 1/3 - 원형 인포그래픽
