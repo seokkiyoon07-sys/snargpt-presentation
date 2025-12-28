@@ -1,5 +1,16 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
+
+// KaTeX 수식 렌더링 컴포넌트
+const Katex = ({ math, display = false }) => {
+  const html = katex.renderToString(math, {
+    throwOnError: false,
+    displayMode: display,
+  });
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+};
 
 // 이미지 imports (Vite가 빌드 시 올바른 경로로 변환)
 import snLogo from '/sn-logo.png';
@@ -71,21 +82,11 @@ const Scene01Slide = () => {
     {
       title: '수학 인강 강사',
       subtitle: '나에게 맞는 강사 찾기',
-      prompt: `수학 인강 강사를 고르려고 해.
+      prompt: `나는 논리적인 비약이 있으면 잠이 안 오는 스타일이야.
 
-중요한 건
-'누가 유명한지'가 아니라,
-내 사고 스타일에 맞는지를 알고 싶어.
-
-그래서 다음 기준으로 설명해줘.
-
-• 개념 설명이 강한 강사 vs 문제 접근이 강한 강사
-• 풀이를 많이 보여주는 강사 vs 사고 과정을 강조하는 강사
-• 진도를 빠르게 나가는 커리큘럼 vs 반복 훈련형 커리큘럼
-
-각 유형이 어떤 학생에게 맞고,
-어떤 학생에게는 위험한지도 함께 말해줘.
-메가, 대성, 시대인재 1,2,3,4 타 모두 알려줘.`,
+한석원 선생님의 본질적인 풀이와
+현우진 선생님의 도구 정리 중
+내 성향에 더 맞는 '사고의 결'은 무엇일까?`,
       response: (
         <div style={{ fontSize: '0.8rem', lineHeight: 1.5 }}>
           <p style={{ marginBottom: '0.75rem' }}>스엔 학생! 수학 1타부터 4타급 강사들을 3가지 기준으로 비교 분석해 드릴게요.</p>
@@ -146,26 +147,11 @@ const Scene01Slide = () => {
     {
       title: '수학 학습 설계',
       subtitle: '나만의 커리큘럼 만들기',
-      prompt: `너는 대한민국 수능 수학 교육 전문가이자 입시 전략가야. 나의 현재 상태를 바탕으로, 수능까지 흔들리지 않는 [수학 완벽 정복 커리큘럼]을 짜줘.
+      prompt: `3등급(82%)에서 안정적 1등급으로 가는 '행동 중심' 커리큘럼 짜줘.
 
-1. 나의 현재 상태 (Diagnosis)
-• 현재 등급/백분위: 3등급 / 82%
-• 가장 자신 있는 단원: 수II 미분법
-• 가장 취약한 단원: 수I 삼각함수, 확률과 통계
-• 나의 사고 스타일: 개념 이해는 빠르나 실전 적용이 늦음
-
-2. 학습 목표 및 가용 시간 (Goal & Time)
-• 목표 등급: 안정적인 1등급
-• 하루 수학 공부 가능 시간: 평일 4시간, 주말 8시간
-• 현재 수강 중인 인강/교재: 현우진 뉴런, 쎈, 기출의 미래
-
-3. 요청 사항 (Output Format)
-• [Phase 1] 취약 단원 보완을 위한 구체적인 복습 방법과 기간
-• [Phase 2] 기출 분석 시 '한 문제당 몇 분', 'N회독' 방식
-• [Phase 3] 킬러 문항 대비 시점과 실전 모의고사 활용법
-• [Special] SNarGo, SNARVIS 활용 가이드
-
-단순히 열심히 하라는 말이 아니라, 주차별/일차별로 내가 당장 내일부터 실행할 수 있는 '행동 강령' 위주로 짜줘!`,
+약점: 수I 삼각함수, 확률과 통계 (실전 적용 느림)
+가용 시간: 평일 4h, 주말 8h (교재: 뉴런, 쎈, 기출의 미래)
+요청: 단계별(취약 보완/기출 분석/실모) 주차별 행동 강령과 SNarGPT 활용 가이드 포함.`,
       response: `(SNARVIS) SNARVIS 입니다.
 
 반가워요, 스엔 학생! 현우진 선생님의 '실전 개념(뉴런) - 문제 풀이(드릴) - 실전 모의고사(킬링캠프)' 흐름에 SNarGPT의 기능을 완벽하게 결합한 로드맵입니다.
@@ -194,27 +180,8 @@ const Scene01Slide = () => {
     {
       title: '월간/주간 계획',
       subtitle: '수능까지의 로드맵',
-      prompt: `너는 수능 수학 1등급 제조기이자 최고의 입시 컨설턴트야. 내가 수능 당일까지 지치지 않고 완주할 수 있도록 [월간/주간 맞춤형 학습 로드맵]을 설계해 줘.
-
-1. 현재 나의 위치 (Current Status)
-• 목표: 수능 수학 안정적 1등급 / 의대 지망
-• 현재 수준: 6월 모의고사 3등급(78점), 수II 미분 킬러 문항 취약
-• 주요 교재/인강: 현우진 뉴런 & 드릴, 기출의 미래
-
-2. 월간 거시 전략 (Monthly Milestone)
-• 달별로 [개념 체화 - 기출 분석 - N제 정복 - 실전 모의고사] 비중 설정
-• 각 달마다 '필수 과업(Must-Do)' 3가지씩 제시
-
-3. 주간 미시 실행 (Weekly Action Plan)
-• [월~금]: 인강 수강, 복습, 기출 풀이의 황금 비율
-• [토~일]: 주간 오답 정리 및 취약 단원 집중 보완
-
-4. SNarGPT 전문가 활용 지침
-• SNarGo: 고난도 문제 사고 과정 교정 타이밍
-• SNarGen: 부족한 단원 변형 문제 요청 방법
-• SNARVIS: 계획이 밀리거나 멘탈이 흔들릴 때 피드백
-
-당장 이번 주 월요일부터 실행할 수 있는 '행동 중심'의 답변을 원해!`,
+      prompt: `6평 3등급 의대 목표야. 수II 미분 킬러가 약점인데, 현우진 커리 기반으로 수능까지의 월간/주간 행동 강령을 짜줘.
+당장 이번 주 월요일부터 실행할 수 있게 구체적이어야 해. 특히 문제 풀다 막힐 때 SNarGo를, 유형 훈련이 필요할 때 SNarGen을 어떻게 써야 할지 활용 타이밍도 알려줘!`,
       response: (
         <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
           <p style={{ marginBottom: '0.75rem' }}><strong>(SNARVIS)</strong> SNARVIS 입니다.</p>
@@ -282,7 +249,11 @@ const Scene01Slide = () => {
     {
       title: 'SN독학기숙학원 정보',
       subtitle: '학원 정보 검색',
-      prompt: ['2027학년도 SN독학기숙학원 학사일정 sn블로그에서 확인해줘', '오늘 점심 메뉴 뭐야?'],
+      prompt: [
+        '2027학년도 SN독학기숙학원 학사일정 sn블로그에서 확인해줘',
+        '오늘 점심 메뉴 뭐야?',
+        "오늘 비가 오는데, 학원 실내 온도 조절이나 환기 일정은 어떻게 돼? 그리고 이런 날 공부가 안 될 때 SN 선배들이 추천하는 '멘탈 관리법' 하나만 알려줘."
+      ],
       response: '',
     },
   ];
@@ -419,6 +390,24 @@ const Scene01Slide = () => {
               <div style={{ width: 32, height: 32, background: '#1a1a1a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
                 <span style={{ fontSize: '0.9rem', color: 'white' }}>↑</span>
               </div>
+            </div>
+            {/* 마나 표시 */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '0.5rem',
+              paddingRight: '0.25rem'
+            }}>
+              <span style={{
+                fontSize: '0.7rem',
+                color: '#3b82f6',
+                background: 'rgba(59, 130, 246, 0.1)',
+                padding: '0.25rem 0.6rem',
+                borderRadius: '1rem',
+                fontWeight: 500
+              }}>
+                이 요청 시 소모되는 예상 마나: 💧 {[12, 18, 15, 8][activeTab]}
+              </span>
             </div>
           </div>
         </div>
@@ -832,7 +821,7 @@ const badUsagePrompts = [
 // 잘못된 사용 슬라이드 컴포넌트 (10페이지 스타일)
 const BadUsageSlide = () => {
   const [visibleIndex, setVisibleIndex] = useState(-1);
-  const [extraToggle, setExtraToggle] = useState({ first: false, second: false });
+  const [extraToggle, setExtraToggle] = useState({ first: false, second: false, mana: false });
 
   const handleItemClick = (idx, e) => {
     e.stopPropagation();
@@ -926,6 +915,7 @@ const BadUsageSlide = () => {
               borderRadius: '0.5rem',
               cursor: 'pointer',
               border: '1px solid #fca5a5',
+              marginBottom: '0.5rem',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -942,6 +932,54 @@ const BadUsageSlide = () => {
                 <p style={{ color: '#ef4444', fontWeight: 600 }}>답변은: 얕고, 보수적이고, 최소한으로만 나옴</p>
                 <div style={{ marginTop: '0.5rem', padding: '0.5rem', background: 'rgba(239,68,68,0.1)', borderRadius: '0.25rem', borderLeft: '2px solid #ef4444' }}>
                   <p style={{ color: '#ef4444', fontWeight: 600, fontSize: '0.8rem' }}>답이 틀리진 않지만, 훈련에는 아무 도움도 안 됩니다.</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 3️⃣ 마나 관리 필수 */}
+          <div
+            onClick={(e) => toggleExtra('mana', e)}
+            style={{
+              padding: '0.75rem',
+              background: extraToggle.mana ? '#dbeafe' : 'white',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #60a5fa',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <p style={{ fontWeight: 600, fontSize: '0.85rem', color: '#2563eb' }}>3️⃣ 마나 관리 필수</p>
+              <span style={{ color: '#2563eb' }}>{extraToggle.mana ? '−' : '+'}</span>
+            </div>
+            {extraToggle.mana && (
+              <div style={{ marginTop: '0.75rem', fontSize: '0.8rem' }}>
+                <p style={{ color: '#2563eb', fontWeight: 700, marginBottom: '0.5rem' }}>🔵 마나란?</p>
+
+                <div style={{ marginBottom: '0.75rem', padding: '0.5rem', background: 'rgba(37,99,235,0.05)', borderRadius: '0.25rem', borderLeft: '2px solid #2563eb' }}>
+                  <p style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', marginBottom: '0.25rem' }}>[훈련 중심]</p>
+                  <p style={{ color: 'var(--text-dark)', fontWeight: 600, marginBottom: '0.25rem' }}>"마나는 여러분의 '사고의 밀도'입니다"</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>AI가 복잡한 질문, 깊은 사고, 정밀한 응답에 '에너지를 쓰는 것'</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>가벼운 질문 → 가볍게 소모</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>정교하고 복잡한 질문 → 더 많이 소모</p>
+                  <p style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', marginTop: '0.25rem' }}>👉 마나를 아껴야 할 때와 써야 할 때를 구분하는 것도 '훈련'입니다.</p>
+                </div>
+
+                <div style={{ marginBottom: '0.75rem', padding: '0.5rem', background: 'rgba(37,99,235,0.05)', borderRadius: '0.25rem', borderLeft: '2px solid #2563eb' }}>
+                  <p style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', marginBottom: '0.25rem' }}>[게임/성장 중심]</p>
+                  <p style={{ color: 'var(--text-dark)', fontWeight: 600, marginBottom: '0.25rem' }}>"공부는 RPG, 마나는 여러분의 '필살기'입니다"</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>AI의 마나는 무한하지 않아요</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>중요한 전투(어려운 개념, 심화 문제)에 마나를 쓰세요</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>쉬운 것까지 AI에게 맡기면 마나가 낭비됩니다</p>
+                  <p style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', marginTop: '0.25rem' }}>👉 마나 낭비 = 경험치 낭비</p>
+                </div>
+
+                <div style={{ padding: '0.5rem', background: 'rgba(37,99,235,0.05)', borderRadius: '0.25rem', borderLeft: '2px solid #2563eb' }}>
+                  <p style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', marginBottom: '0.25rem' }}>[에너지 중심]</p>
+                  <p style={{ color: 'var(--text-dark)', fontWeight: 600, marginBottom: '0.25rem' }}>"마나는 AI가 여러분을 위해 타오르는 '열정'입니다"</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>AI도 '에너지'를 갖고 대화해요</p>
+                  <p style={{ color: 'var(--text-dark)', fontSize: '0.75rem' }}>낭비하면 빨리 식고, 아끼면 끝까지 뜨겁게</p>
+                  <p style={{ color: '#2563eb', fontWeight: 600, fontSize: '0.75rem', marginTop: '0.25rem' }}>👉 마나를 아껴야 AI도 끝까지 집중할 수 있어요</p>
                 </div>
               </div>
             )}
@@ -1193,28 +1231,82 @@ const Scene02Slide = () => {
 
   const prompts = [
     {
-      title: '탭 1 제목',
-      subtitle: '탭 1 부제목',
-      prompt: '탭 1 프롬프트 예시',
-      response: '탭 1 응답 예시',
+      title: '문제 검색',
+      tags: ['#정교한_타겟팅', '#기출의_모든_것'],
+      prompt: '2024학년도 수능 수학 22번 찾아줘',
+      response: (
+        <div style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNarGo)</strong> 요청하신 2024학년도 수능 수학 22번 문제를 찾아왔습니다. 이 문제는 당시 수험생들 사이에서 꽤나 화제가 되었던 고난도 문항이죠.</p>
+          <div style={{ background: '#f8f8f8', padding: '1rem 1.25rem', borderRadius: '0.5rem', marginBottom: '0.75rem', border: '1px solid #e5e5e5' }}>
+            <p style={{ fontWeight: 600, color: 'var(--green-deep)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>📝 2024학년도 수능 수학 22번</p>
+            <p style={{ fontSize: '0.9rem', marginBottom: '0.75rem' }}>최고차항의 계수가 <Katex math="1" />인 삼차함수 <Katex math="f(x)" />가 다음 조건을 만족시킨다.</p>
+            <div style={{ padding: '0.75rem 1rem', background: 'white', borderRadius: '0.25rem', marginBottom: '0.75rem', borderLeft: '3px solid var(--mint)' }}>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-dark)' }}>
+                함수 <Katex math="f(x)" />에 대하여 <Katex math="f(k-1) \cdot f(k+1) < 0" />을 만족시키는 정수 <Katex math="k" />는 존재하지 않는다.
+              </p>
+            </div>
+            <p style={{ fontSize: '0.9rem' }}>
+              <Katex math="f'(-\frac{1}{4}) = -\frac{1}{4}" />, <Katex math="f'(\frac{1}{4}) < 0" />일 때, <Katex math="f(8)" />의 값을 구하시오. <span style={{ color: 'var(--green-deep)', fontWeight: 600 }}>[4점]</span>
+            </p>
+          </div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>문제의 조건이 아주 독특하죠? "정수 <Katex math="k" />가 존재하지 않는다"는 말을 어떻게 해석하느냐가 이 풀이의 핵심이에요. 이 문제를 같이 풀어볼까요? 🌟</p>
+        </div>
+      ),
     },
     {
-      title: '탭 2 제목',
-      subtitle: '탭 2 부제목',
-      prompt: '탭 2 프롬프트 예시',
-      response: '탭 2 응답 예시',
+      title: '유사문제 검색',
+      tags: ['#유형의_본질', '#변형_대응력'],
+      prompt: '방금 찾은 문제로 출제 의도가 같은 문제들 더 찾아줘. 숫자나 조건만 바뀐 변형 문제들로. 유사도도 표시해줘',
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '0.5rem' }}><strong>(SNarGo)</strong> 유사 문제 패턴을 분석했습니다.</p>
+          <div style={{ background: '#f8f8f8', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', marginBottom: '0.5rem', border: '1px solid #e5e5e5' }}>
+            <p style={{ fontWeight: 600, color: 'var(--green-deep)', marginBottom: '0.25rem', fontSize: '0.75rem' }}>🔗 유사 패턴 문제 (5건)</p>
+            <p style={{ fontSize: '0.7rem', marginBottom: '0.15rem' }}>• 교육청 2023년 10월 나형 20번 <span style={{ color: '#22c55e' }}>유사도 94%</span></p>
+            <p style={{ fontSize: '0.7rem', marginBottom: '0.15rem' }}>• 교육청 2022년 7월 21번 <span style={{ color: '#22c55e' }}>유사도 89%</span></p>
+            <p style={{ fontSize: '0.7rem' }}>• 사설 N제 변형 3건 (SN멤버 전용)</p>
+          </div>
+          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>💡 하나를 배우면 열을 알게 되는 마법! 유형의 본질을 꿰뚫으세요.</p>
+        </div>
+      ),
     },
     {
-      title: '탭 3 제목',
-      subtitle: '탭 3 부제목',
-      prompt: '탭 3 프롬프트 예시',
-      response: '탭 3 응답 예시',
+      title: '문제 풀기 @SNarGo',
+      tags: ['#사고_로직_교정', '#SNarGo_순한맛_힌트'],
+      prompt: '이 문제 풀다가 막혔어. f(x)=x³-3ax²+b에서 극댓값이 4일 때 a+b 구하는 건데, 어디서부터 접근해야 할지 모르겠어. 답 말고 힌트만 줘.',
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '0.5rem' }}><strong>(SNarGo)</strong> 순한맛 힌트 드릴게요! 🌶️</p>
+          <div style={{ background: 'var(--mint-light)', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', marginBottom: '0.5rem', borderLeft: '3px solid var(--green-deep)' }}>
+            <p style={{ fontWeight: 600, color: 'var(--green-deep)', marginBottom: '0.25rem', fontSize: '0.75rem' }}>🔑 힌트 1단계</p>
+            <p style={{ fontSize: '0.7rem' }}>"극값이 존재한다"는 조건에서 f'(x)=0의 해가 어떤 성질을 가져야 할까요?</p>
+          </div>
+          <div style={{ background: '#f8f8f8', padding: '0.5rem 0.75rem', borderRadius: '0.5rem', border: '1px solid #e5e5e5' }}>
+            <p style={{ fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.25rem', fontSize: '0.75rem' }}>🔒 힌트 2단계 (더 필요하면 요청)</p>
+            <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>판별식 D와 극댓값 조건을 연결해 보세요.</p>
+          </div>
+          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>💡 답지를 보는 게 아니라, AI와 대화하며 내 뇌를 동기화하세요!</p>
+        </div>
+      ),
     },
     {
-      title: '탭 4 제목',
-      subtitle: '탭 4 부제목',
-      prompt: '탭 4 프롬프트 예시',
-      response: '탭 4 응답 예시',
+      title: '문제 생성',
+      tags: ['#최종_병기_SNarGen', '#나만을_위한_킬러'],
+      prompt: "내가 방금 푼 2025학년도 6평 22번이랑 '함수 추론' 원리는 같지만, 계산 과정에서 '절댓값 그래프'가 하나 더 추가된 '빌런급' 변형 문제 하나만 만들어줘. 내 한계를 시험해보고 싶어! 평가원스럽게 내주고, 계산도 딱 떨어지게 깔끔하게 해줘. 꼭 스나고에게 점검받고 나에게 제출해.",
+      response: (
+        <div style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNarGen)</strong> 맞춤형 킬러 문제를 생성했습니다! 🔥</p>
+          <div style={{ background: '#fff7ed', padding: '1rem 1.25rem', borderRadius: '0.5rem', marginBottom: '0.75rem', border: '1px solid #fed7aa' }}>
+            <p style={{ fontWeight: 600, color: '#ea580c', marginBottom: '0.75rem', fontSize: '0.95rem' }}>🎯 SNarGen 변형문제 #2847</p>
+            <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+              함수 <Katex math="f(x) = x^3 - 3ax^2 + b" />가 <Katex math="x = p" />에서 극대, <Katex math="x = q" />에서 극소를 가지고, <Katex math="f(p) - f(q) = 4" />일 때, <Katex math="a^2 + b" />의 최솟값을 구하시오.
+            </p>
+            <p style={{ fontSize: '0.8rem', color: '#ea580c', fontWeight: 600 }}>난이도: ★★★★☆ (준킬러)</p>
+          </div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>💡 훈련의 끝은 창조입니다. 낯선 상황에서도 실력을 발휘하세요!</p>
+          <p style={{ fontSize: '0.75rem', color: '#3b82f6', marginTop: '0.5rem' }}>💧 단, SNarGEN을 활용한 문제 생성은 마나가 많이 소모됩니다.</p>
+        </div>
+      ),
     },
   ];
 
@@ -1252,7 +1344,23 @@ const Scene02Slide = () => {
                 }}>
                   {item.title}
                 </p>
-                <p className="muted-text" style={{ fontSize: '0.875rem' }}>{item.subtitle}</p>
+                <p className="muted-text" style={{ fontSize: '0.875rem', marginBottom: '0.35rem' }}>{item.subtitle}</p>
+                {item.tags && (
+                  <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                    {item.tags.map((tag, idx) => (
+                      <span key={idx} style={{
+                        fontSize: '0.65rem',
+                        padding: '0.15rem 0.4rem',
+                        background: activeTab === index ? 'var(--mint)' : 'var(--gray-light)',
+                        color: activeTab === index ? 'var(--green-deep)' : 'var(--text-muted)',
+                        borderRadius: '0.25rem',
+                        fontWeight: 500,
+                      }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -1350,6 +1458,24 @@ const Scene02Slide = () => {
                 <span style={{ color: 'white', fontSize: '0.9rem' }}>➤</span>
               </div>
             </div>
+            {/* 마나 표시 */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '0.5rem',
+              paddingRight: '0.25rem'
+            }}>
+              <span style={{
+                fontSize: '0.7rem',
+                color: '#3b82f6',
+                background: 'rgba(59, 130, 246, 0.1)',
+                padding: '0.25rem 0.6rem',
+                borderRadius: '1rem',
+                fontWeight: 500
+              }}>
+                이 요청 시 소모되는 예상 마나: 💧 {[10, 12, 18, 25][activeTab]}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -1361,24 +1487,194 @@ const Scene02Slide = () => {
 const Scene03Slide = () => {
   const [activeTab, setActiveTab] = useState(0);
 
+  const [expandedSection, setExpandedSection] = useState({ tab1: null, tab2: null, tab3: null });
+
+  const toggleSection = (tab, section, e) => {
+    e.stopPropagation();
+    setExpandedSection(prev => ({
+      ...prev,
+      [tab]: prev[tab] === section ? null : section
+    }));
+  };
+
   const prompts = [
     {
-      title: '탭 1 제목',
-      subtitle: '탭 1 부제목',
-      prompt: '탭 1 프롬프트 예시',
-      response: '탭 1 응답 예시',
+      title: '오답 디코딩',
+      subtitle: '"왜 틀렸는지"에 대한 사고 로직 해부',
+      prompt: "내가 지난 일주일간 틀린 문제 10개를 분석해봐. 내가 '조건을 잘못 읽는' 건지, 아니면 '특정 개념을 오개념으로 알고 있는' 건지 내 뇌의 오류 코드를 찾아줘.",
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNarGo)</strong> 스엔 학생의 22번 오답을 분석했습니다.</p>
+
+          <div
+            onClick={(e) => toggleSection('tab1', 'breakdown', e)}
+            style={{
+              padding: '0.5rem 0.75rem',
+              background: expandedSection.tab1 === 'breakdown' ? 'var(--mint-light)' : '#f8f8f8',
+              borderRadius: '0.5rem',
+              marginBottom: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ fontWeight: 600, color: 'var(--green-deep)', margin: 0 }}>📊 오답 원인 분석</p>
+              <span style={{ color: 'var(--green-deep)' }}>{expandedSection.tab1 === 'breakdown' ? '−' : '+'}</span>
+            </div>
+            {expandedSection.tab1 === 'breakdown' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                <p style={{ marginBottom: '0.25rem' }}>• <strong style={{ color: '#ef4444' }}>개념 부재</strong>: 12%</p>
+                <p style={{ marginBottom: '0.25rem' }}>• <strong style={{ color: '#f59e0b' }}>조건 간과</strong>: 54% ⚠️</p>
+                <p style={{ marginBottom: '0.25rem' }}>• <strong style={{ color: '#3b82f6' }}>계산 실수</strong>: 18%</p>
+                <p>• <strong style={{ color: '#8b5cf6' }}>논리 비약</strong>: 16%</p>
+              </div>
+            )}
+          </div>
+
+          <div
+            onClick={(e) => toggleSection('tab1', 'habit', e)}
+            style={{
+              padding: '0.5rem 0.75rem',
+              background: expandedSection.tab1 === 'habit' ? 'var(--mint-light)' : '#f8f8f8',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ fontWeight: 600, color: 'var(--green-deep)', margin: 0 }}>🔄 반복되는 습관 패턴</p>
+              <span style={{ color: 'var(--green-deep)' }}>{expandedSection.tab1 === 'habit' ? '−' : '+'}</span>
+            </div>
+            {expandedSection.tab1 === 'habit' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                <p style={{ color: '#ef4444', fontWeight: 600, marginBottom: '0.25rem' }}>⚠️ 발견된 습관:</p>
+                <p style={{ marginBottom: '0.25rem' }}>"삼차함수 그래프 추론 시 <strong>'최고차항 계수'</strong> 조건을 놓치는 습관이 <strong>3번 반복</strong>되었습니다."</p>
+                <p style={{ color: 'var(--green-deep)', fontWeight: 600, marginTop: '0.5rem' }}>👉 처방: 문제 읽을 때 '계수 조건' 먼저 체크하는 루틴 만들기</p>
+              </div>
+            )}
+          </div>
+        </div>
+      ),
     },
     {
-      title: '탭 2 제목',
-      subtitle: '탭 2 부제목',
-      prompt: '탭 2 프롬프트 예시',
-      response: '탭 2 응답 예시',
+      title: '학습 궤적 분석',
+      subtitle: 'SNarlink 연동 나의 진짜 공부량',
+      prompt: '이번 주 내 수학 공부 시간 대비 성취도 리포트 보여줘. 어떤 단원에 시간을 많이 썼고, 그게 정답률 상승으로 이어졌어?',
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNARVIS)</strong> 이번 주 학습 궤적 리포트입니다.</p>
+
+          <div
+            onClick={(e) => toggleSection('tab2', 'heatmap', e)}
+            style={{
+              padding: '0.5rem 0.75rem',
+              background: expandedSection.tab2 === 'heatmap' ? 'var(--mint-light)' : '#f8f8f8',
+              borderRadius: '0.5rem',
+              marginBottom: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ fontWeight: 600, color: 'var(--green-deep)', margin: 0 }}>🗺️ 단원별 숙련도 Heatmap</p>
+              <span style={{ color: 'var(--green-deep)' }}>{expandedSection.tab2 === 'heatmap' ? '−' : '+'}</span>
+            </div>
+            {expandedSection.tab2 === 'heatmap' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
+                  <span style={{ padding: '0.25rem 0.5rem', background: '#22c55e', color: 'white', borderRadius: '0.25rem', fontSize: '0.7rem' }}>수II 미분 85%</span>
+                  <span style={{ padding: '0.25rem 0.5rem', background: '#22c55e', color: 'white', borderRadius: '0.25rem', fontSize: '0.7rem' }}>수열 78%</span>
+                  <span style={{ padding: '0.25rem 0.5rem', background: '#f59e0b', color: 'white', borderRadius: '0.25rem', fontSize: '0.7rem' }}>적분 62%</span>
+                  <span style={{ padding: '0.25rem 0.5rem', background: '#ef4444', color: 'white', borderRadius: '0.25rem', fontSize: '0.7rem' }}>삼각함수 45%</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div
+            onClick={(e) => toggleSection('tab2', 'insight', e)}
+            style={{
+              padding: '0.5rem 0.75rem',
+              background: expandedSection.tab2 === 'insight' ? 'var(--mint-light)' : '#f8f8f8',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ fontWeight: 600, color: 'var(--green-deep)', margin: 0 }}>💡 AI 인사이트</p>
+              <span style={{ color: 'var(--green-deep)' }}>{expandedSection.tab2 === 'insight' ? '−' : '+'}</span>
+            </div>
+            {expandedSection.tab2 === 'insight' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                <p style={{ marginBottom: '0.25rem' }}>✅ <strong>수II 미분</strong>: 공부 시간 대비 정답률 85%로 <span style={{ color: '#22c55e', fontWeight: 600 }}>안정권</span></p>
+                <p style={{ marginBottom: '0.25rem' }}>⚠️ <strong>삼각함수</strong>: 투입 시간은 많으나 킬러 정답률 낮음</p>
+                <p style={{ color: '#ef4444', fontWeight: 600 }}>👉 '개념 재점검' 필요!</p>
+              </div>
+            )}
+          </div>
+        </div>
+      ),
     },
     {
-      title: '탭 3 제목',
-      subtitle: '탭 3 부제목',
-      prompt: '탭 3 프롬프트 예시',
-      response: '탭 3 응답 예시',
+      title: 'AI 비밀노트',
+      subtitle: '나보다 나를 더 잘 아는 AI 처방전',
+      prompt: '내 오답 기록과 학습 패턴을 바탕으로, 다음 주 1회 상담 때 선생님이랑 꼭 논의해야 할 핵심 약점 3가지만 뽑아줘.',
+      response: (
+        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '0.75rem' }}><strong>(SNARVIS)</strong> 상담용 리포트를 준비했습니다.</p>
+
+          <div
+            onClick={(e) => toggleSection('tab3', 'report', e)}
+            style={{
+              padding: '0.5rem 0.75rem',
+              background: expandedSection.tab3 === 'report' ? 'var(--mint-light)' : '#f8f8f8',
+              borderRadius: '0.5rem',
+              marginBottom: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ fontWeight: 600, color: 'var(--green-deep)', margin: 0 }}>📋 핵심 약점 TOP 3</p>
+              <span style={{ color: 'var(--green-deep)' }}>{expandedSection.tab3 === 'report' ? '−' : '+'}</span>
+            </div>
+            {expandedSection.tab3 === 'report' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                <p style={{ marginBottom: '0.35rem' }}><strong style={{ color: '#ef4444' }}>1.</strong> 준킬러 문항 시간 단축 전략 필요</p>
+                <p style={{ marginBottom: '0.35rem' }}><strong style={{ color: '#f59e0b' }}>2.</strong> 확통 케이스 분류 시 중복 계산 습관 교정</p>
+                <p><strong style={{ color: '#3b82f6' }}>3.</strong> 멘탈 관리 (시험 후반부 집중력 저하)</p>
+              </div>
+            )}
+          </div>
+
+          <div
+            onClick={(e) => toggleSection('tab3', 'action', e)}
+            style={{
+              padding: '0.5rem 0.75rem',
+              background: expandedSection.tab3 === 'action' ? 'var(--mint-light)' : '#f8f8f8',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ fontWeight: 600, color: 'var(--green-deep)', margin: 0 }}>🎯 다음 주 액션 플랜</p>
+              <span style={{ color: 'var(--green-deep)' }}>{expandedSection.tab3 === 'action' ? '−' : '+'}</span>
+            </div>
+            {expandedSection.tab3 === 'action' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                <p style={{ marginBottom: '0.25rem' }}>• 준킬러 타이머 훈련 (문항당 8분 제한)</p>
+                <p style={{ marginBottom: '0.25rem' }}>• 확통 케이스 트리 노트 작성</p>
+                <p>• 모의고사 후반 30분 집중 루틴 설계</p>
+                <div style={{ marginTop: '0.5rem', padding: '0.35rem', background: 'var(--mint)', borderRadius: '0.25rem' }}>
+                  <p style={{ color: 'var(--green-deep)', fontWeight: 600, margin: 0, fontSize: '0.7rem' }}>💬 이 내용을 선생님과 상담 때 공유하세요!</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      ),
     },
   ];
 
@@ -1514,6 +1810,24 @@ const Scene03Slide = () => {
                 <span style={{ color: 'white', fontSize: '0.9rem' }}>➤</span>
               </div>
             </div>
+            {/* 마나 표시 */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '0.5rem',
+              paddingRight: '0.25rem'
+            }}>
+              <span style={{
+                fontSize: '0.7rem',
+                color: '#3b82f6',
+                background: 'rgba(59, 130, 246, 0.1)',
+                padding: '0.25rem 0.6rem',
+                borderRadius: '1rem',
+                fontWeight: 500
+              }}>
+                이 요청 시 소모되는 예상 마나: 💧 {[20, 15, 22][activeTab]}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -1530,9 +1844,9 @@ const slides = [
       <div className="split-layout">
         <div className="split-left">
           <p className="subtitle">SNarGPT Presentation</p>
-          <h1 style={{ fontSize: '3.5rem', fontWeight: 900, lineHeight: 1.2, marginBottom: '2rem' }}>
-            공부가 <span className="accent-text">'감'</span>에서<br />
-            <span className="highlight-text">'훈련'</span>이 되는 순간
+          <h1 style={{ fontSize: '3rem', fontWeight: 900, lineHeight: 1.2, marginBottom: '2rem' }}>
+            막연한 <span style={{ color: 'var(--text-muted)' }}>'감'</span>을 압도하는,<br />
+            데이터의 <span className="accent-text">'확신'</span>
           </h1>
           <div className="divider" style={{ marginBottom: '2rem' }} />
           <p className="muted-text" style={{ fontSize: '1.25rem', marginBottom: '2rem' }}>
@@ -1929,9 +2243,303 @@ const slides = [
     content: <Scene03Slide />,
   },
 
-  // Slide 12: 시스템 1/3 - 원형 인포그래픽
+  // Slide 12: 축적의 힘 - The Power of Accumulation
   {
     id: 12,
+    content: (
+      <div className="split-layout">
+        <div className="split-left" style={{ flex: '0 0 50%' }}>
+          <span className="tag" style={{ marginBottom: '1.5rem' }}>The Power of Accumulation</span>
+          <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '1rem' }}>
+            <span className="accent-text">축적</span>의 힘
+          </h2>
+          <p className="muted-text" style={{ fontSize: '1rem', marginBottom: '2rem' }}>
+            당신의 데이터가 쌓일수록, SNarGPT는 당신의 <strong style={{ color: 'var(--text-dark)' }}>'사고 복제본'</strong>이 됩니다.
+          </p>
+          <div className="divider" style={{ marginBottom: '2rem' }} />
+
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.5rem', color: 'var(--green-deep)' }}>
+            "많이 대화할수록,<br />
+            SNarGPT는 당신보다<br />
+            당신을 더 잘 알게 됩니다."
+          </h3>
+
+          <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+            단순한 챗봇이 아닙니다.<br />
+            당신의 <strong style={{ color: 'var(--text-dark)' }}>오답 습관</strong>, <strong style={{ color: 'var(--text-dark)' }}>취약한 논리</strong>,<br />
+            심지어 <strong style={{ color: 'var(--text-dark)' }}>멘탈의 흐름</strong>까지 기록합니다.
+          </p>
+
+          <div className="card card-mint" style={{ padding: '1rem' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--green-deep)', margin: 0 }}>
+              💡 마나를 쓰는 것은 비용이 아니라,<br />
+              나를 위한 <strong>'데이터 투자'</strong>입니다.
+            </p>
+          </div>
+        </div>
+        <div className="split-right" style={{ background: 'var(--mint-light)', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          {/* Day 1 vs Day 30 비교 */}
+          <div style={{ width: '100%', maxWidth: 400 }}>
+            {/* Day 1 */}
+            <div style={{ marginBottom: '2rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>Day 1</span>
+              <div style={{ background: 'white', borderRadius: '1rem', padding: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', border: '1px solid #e5e5e5' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                  <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.7rem' }}>👤</span>
+                  </div>
+                  <div style={{ background: '#f4f4f4', borderRadius: '0.75rem', padding: '0.5rem 0.75rem' }}>
+                    <p style={{ fontSize: '0.8rem', margin: 0 }}>삼각함수 문제 풀이 알려줘</p>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                  <div style={{ width: 28, height: 28, background: 'var(--gray-light)', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--text-muted)' }}>SN</span>
+                  </div>
+                  <div style={{ background: '#f8f8f8', borderRadius: '0.75rem', padding: '0.5rem 0.75rem', border: '1px solid #e5e5e5' }}>
+                    <p style={{ fontSize: '0.8rem', margin: 0, color: 'var(--text-muted)' }}>"안녕하세요! 어떤 유형의 삼각함수 문제인가요?"</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Day 30 */}
+            <div>
+              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--green-deep)', marginBottom: '0.5rem', display: 'block' }}>Day 30</span>
+              <div style={{ background: 'white', borderRadius: '1rem', padding: '1rem', boxShadow: '0 4px 16px rgba(45, 90, 71, 0.15)', border: '2px solid var(--mint)' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                  <div style={{ width: 28, height: 28, background: '#e5e5e5', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.7rem' }}>👤</span>
+                  </div>
+                  <div style={{ background: '#f4f4f4', borderRadius: '0.75rem', padding: '0.5rem 0.75rem' }}>
+                    <p style={{ fontSize: '0.8rem', margin: 0 }}>삼각함수 문제 풀이 알려줘</p>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
+                  <div style={{ width: 28, height: 28, background: 'var(--green-deep)', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.6rem', fontWeight: 700, color: 'white' }}>SN</span>
+                  </div>
+                  <div style={{ background: 'var(--mint-light)', borderRadius: '0.75rem', padding: '0.5rem 0.75rem', border: '1px solid var(--mint)' }}>
+                    <p style={{ fontSize: '0.8rem', margin: 0, color: 'var(--green-deep)' }}>
+                      "스엔 학생, 지난번 <strong>삼각함수 합성</strong>에서 부호 실수 패턴이 또 보이네요. 이번엔 <strong>단위원 그림</strong>부터 그려볼까요? 🎯"
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 하단 안내 문구 */}
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1.5rem', textAlign: 'center' }}>
+            💾 SNARVIS의 비밀노트에는 당신의 성장 전략이<br />실시간으로 업데이트되고 있습니다.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  // Slide 13: 보안 - Safe & Secure
+  {
+    id: 13,
+    content: (
+      <div className="split-layout">
+        <div className="split-left" style={{ flex: '0 0 50%', overflowY: 'auto' }}>
+          <span className="tag" style={{ marginBottom: '1rem', background: '#dbeafe', color: '#1d4ed8' }}>Safe & Secure</span>
+          <h2 style={{ fontSize: '2rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '0.75rem' }}>
+            철저한 <span className="accent-text">보안</span>,<br />
+            흔들림 없는 <span className="accent-text">신뢰</span>
+          </h2>
+          <p className="muted-text" style={{ fontSize: '0.9rem', marginBottom: '1.25rem' }}>
+            당신의 데이터는 오직 <strong style={{ color: 'var(--text-dark)' }}>당신의 성장</strong>을 위해서만 존재합니다.
+          </p>
+          <div className="divider" style={{ marginBottom: '1rem' }} />
+
+          {/* 6대 보안 약속 */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+            {/* 1. 데이터 격리 */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: '#dbeafe', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: '1.1rem' }}>🔒</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: '0.15rem', fontSize: '0.85rem' }}>철저한 데이터 격리</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  스엔 학생의 데이터는 다른 학생이나 외부 AI 모델과 공유되지 않습니다.
+                </p>
+              </div>
+            </div>
+
+            {/* 2. 목적 외 사용 금지 */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: '#dbeafe', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: '1.1rem' }}>🎯</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: '0.15rem', fontSize: '0.85rem' }}>목적 외 사용 금지</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  학습 데이터는 맞춤형 처방과 상담 리포트 생성에만 사용됩니다.
+                </p>
+              </div>
+            </div>
+
+            {/* 3. 암호화 */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: '#dbeafe', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: '1.1rem' }}>🛡️</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: '#1d4ed8', marginBottom: '0.15rem', fontSize: '0.85rem' }}>최신 암호화 기술</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  모든 대화와 기록은 End-to-End 암호화로 보호됩니다.
+                </p>
+              </div>
+            </div>
+
+            <div className="divider" style={{ margin: '0.25rem 0' }} />
+
+            {/* 4. Human-Off */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: '#fef3c7', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: '1.1rem' }}>🙈</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: '#d97706', marginBottom: '0.15rem', fontSize: '0.85rem' }}>Human-Off: 선생님도 볼 수 없는 공간</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  담임 선생님 포함 그 어떤 '사람'도 원본 대화를 열람할 수 없습니다.<br />
+                  <strong style={{ color: 'var(--text-dark)' }}>마음껏 틀리고, 마음껏 질문하세요.</strong>
+                </p>
+              </div>
+            </div>
+
+            {/* 5. De-identification */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: '#fef3c7', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: '1.1rem' }}>🔀</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: '#d97706', marginBottom: '0.15rem', fontSize: '0.85rem' }}>De-identification: 비식별 데이터</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  모델 성능 향상용 데이터는 이름, 학번 등 식별 정보를 완전히 제거합니다.
+                </p>
+              </div>
+            </div>
+
+            {/* 6. Ethics Guardian */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <div style={{ width: 36, height: 36, background: '#fee2e2', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: '1.1rem' }}>🚨</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: '#dc2626', marginBottom: '0.15rem', fontSize: '0.85rem' }}>Ethics Guardian: 고자질 AI</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  욕설, 비하, 학습 외 악의적 사용은 <strong style={{ color: '#dc2626' }}>실시간 모니터링</strong> 대상입니다.<br />
+                  프라이버시는 존중하되, '공부 공간'의 본질은 지킵니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="split-right" style={{ background: '#eff6ff', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          {/* 데이터 격리 시각화 */}
+          <div style={{ position: 'relative', width: 280, height: 280 }}>
+            {/* 중앙 방패 */}
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 100,
+              height: 100,
+              background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 8px 32px rgba(29, 78, 216, 0.3)',
+              zIndex: 3
+            }}>
+              <span style={{ fontSize: '2rem' }}>🛡️</span>
+            </div>
+
+            {/* 주변 학생 데이터 방 */}
+            {[0, 1, 2, 3, 4, 5].map((i) => {
+              const angle = (i * 60 - 90) * (Math.PI / 180);
+              const radius = 110;
+              const x = Math.cos(angle) * radius;
+              const y = Math.sin(angle) * radius;
+              return (
+                <div
+                  key={i}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                    width: 50,
+                    height: 50,
+                    background: 'white',
+                    borderRadius: '0.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                    border: '2px solid #93c5fd',
+                    zIndex: 2
+                  }}
+                >
+                  <span style={{ fontSize: '1.25rem' }}>👤</span>
+                </div>
+              );
+            })}
+
+            {/* 연결선 (점선) */}
+            <svg style={{ position: 'absolute', width: '100%', height: '100%', zIndex: 1 }}>
+              {[0, 1, 2, 3, 4, 5].map((i) => {
+                const angle = (i * 60 - 90) * (Math.PI / 180);
+                const radius = 85;
+                const x = 140 + Math.cos(angle) * radius;
+                const y = 140 + Math.sin(angle) * radius;
+                return (
+                  <line
+                    key={i}
+                    x1="140"
+                    y1="140"
+                    x2={x}
+                    y2={y}
+                    stroke="#93c5fd"
+                    strokeWidth="2"
+                    strokeDasharray="4,4"
+                  />
+                );
+              })}
+            </svg>
+          </div>
+
+          <p style={{ fontSize: '0.75rem', color: '#1d4ed8', marginTop: '1rem', textAlign: 'center', fontWeight: 600 }}>
+            각 학생의 데이터는 독립된 공간에서<br />안전하게 보호됩니다
+          </p>
+
+          {/* SNARVIS 한마디 */}
+          <div style={{ marginTop: '1rem', padding: '0.75rem 1rem', background: 'white', borderRadius: '0.75rem', boxShadow: '0 2px 12px rgba(0,0,0,0.08)', maxWidth: 320 }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-dark)', lineHeight: 1.5, margin: 0 }}>
+              💬 <strong style={{ color: 'var(--green-deep)' }}>(SNARVIS)</strong> "여러분의 고민과 실수는 오직 AI와 여러분 사이의 비밀입니다. 유출 걱정 없이 마음껏 질문하세요!"
+            </p>
+          </div>
+
+          {/* 경고 문구 */}
+          <div style={{ marginTop: '0.75rem', padding: '0.5rem 0.75rem', background: '#fef2f2', borderRadius: '0.5rem', border: '1px solid #fecaca', maxWidth: 320 }}>
+            <p style={{ fontSize: '0.7rem', color: '#dc2626', lineHeight: 1.4, margin: 0, textAlign: 'center' }}>
+              ⚠️ 단, 학습 외 부적절한 사용은 즉시 관리자에게 통보됩니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  // Slide 14: 시스템 1/3 - 원형 인포그래픽
+  {
+    id: 14,
     content: (
       <div className="split-layout">
         <div className="split-left" style={{ flex: '0 0 45%' }}>
@@ -1973,9 +2581,9 @@ const slides = [
     ),
   },
 
-  // Slide 13: 결론 - 강조 슬라이드
+  // Slide 15: 결론 - 강조 슬라이드
   {
-    id: 13,
+    id: 15,
     className: 'slide-emphasis-bg',
     content: (
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '4rem', textAlign: 'center' }}>
@@ -2010,39 +2618,39 @@ const slides = [
     ),
   },
 
-  // Slide 14: Q&A - ① AI가 틀린 사례 (토글로 4개 과목 이미지 보기)
+  // Slide 16: Q&A - ① AI가 틀린 사례 (토글로 4개 과목 이미지 보기)
   {
-    id: 14,
+    id: 16,
     content: <AIErrorSlide />,
   },
 
-  // Slide 15: Q&A - ② 실제 학생 사용 패턴 (필터로 4개 화면)
+  // Slide 17: Q&A - ② 실제 학생 사용 패턴 (필터로 4개 화면)
   {
-    id: 15,
+    id: 17,
     content: <StudentPatternSlide />,
   },
 
-  // Slide 16: Q&A - ③ 좋은 사용 예시 (iframe 전체 높이 사용)
+  // Slide 18: Q&A - ③ 좋은 사용 예시 (iframe 전체 높이 사용)
   {
-    id: 16,
+    id: 18,
     content: <GoodUsageSlide />,
   },
 
-  // Slide 17: Q&A - ④ 잘못된 사용 예시 (iframe 전체 높이 사용)
+  // Slide 19: Q&A - ④ 잘못된 사용 예시 (iframe 전체 높이 사용)
   {
-    id: 17,
+    id: 19,
     content: <BadUsageSlide />,
   },
 
-  // Slide 18: Q&A - ⑤ 자주 묻는 질문 (FAQ)
+  // Slide 20: Q&A - ⑤ 자주 묻는 질문 (FAQ)
   {
-    id: 18,
+    id: 20,
     content: <QnASlideItem example={qnaExamples[5]} index={4} total={6} />,
   },
 
-  // Slide 19: Q&A - ⑥ 현재와 앞으로 (Roadmap)
+  // Slide 21: Q&A - ⑥ 현재와 앞으로 (Roadmap)
   {
-    id: 19,
+    id: 21,
     content: <QnASlideItem example={qnaExamples[4]} index={5} total={6} />,
   },
 ];
