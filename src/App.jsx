@@ -5,9 +5,19 @@ import './App.css';
 import snLogo from '/sn-logo.png';
 import leesedol from '/leesedol1.png';
 import capyPaste from '/capy_paste.jpg';
-import brain from '/brain.jpg';
+import brain from '/brain.png';
 import otani from '/otani.png';
 import studentStupid from '/student_stupid1.png';
+import koreanImg from '/korean.png';
+import math1Img from '/math1.png';
+import biology2Img from '/biology2.png';
+import earthscienceImg from '/earthscience.png';
+import mathcase1Img from '/mathcase1.png';
+import mathcase2Img from '/mathcase2.png';
+import history1Img from '/history1.png';
+import history2Img from '/history2.png';
+import dokdoImg from '/dokdo.png';
+import socialImg from '/social.png';
 
 // 체크 아이콘 컴포넌트
 const CheckIcon = () => (
@@ -24,6 +34,766 @@ const DecorativeCircles = () => (
     <div className="decorative-circle" style={{ width: 150, height: 150, left: '40%', bottom: -50, opacity: 0.2 }} />
   </>
 );
+
+// Slide 4: 핵심 질문 컴포넌트 (클릭 시 텍스트 변경)
+const CoreQuestionSlide = () => {
+  const [clicked, setClicked] = useState(false);
+
+  return (
+    <div
+      style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '4rem', textAlign: 'center', cursor: 'pointer' }}
+      onClick={(e) => { e.stopPropagation(); setClicked(!clicked); }}
+    >
+      <DecorativeCircles />
+      <div style={{ position: 'relative', zIndex: 2, maxWidth: 800 }}>
+        <span className="tag" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', marginBottom: '2rem', display: 'inline-block' }}>
+          {clicked ? 'The Answer' : 'Core Question'}
+        </span>
+        {!clicked ? (
+          <>
+            <h2 style={{ fontSize: '3rem', fontWeight: 700, lineHeight: 1.4, marginBottom: '2rem' }}>
+              "여러분은 <span className="accent-text">왜 틀렸는지</span><br />
+              알고 틀립니까, 모르고 틀립니까?<br />
+              그리고 데이터로 남습니까?"
+            </h2>
+            <div style={{ width: 80, height: 3, background: 'var(--mint)', margin: '2rem auto' }} />
+            <p className="muted-text" style={{ fontSize: '1.25rem' }}>
+              이유를 모르는 틀림은 '훈련'이 아니라 <strong style={{ color: 'var(--mint)' }}>'반복 노동'</strong>일 뿐입니다.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 700, lineHeight: 1.6, marginBottom: '2rem' }}>
+              지금은 점수를 만드는 시기가 아니라,<br />
+              <span className="accent-text">판단과 사고 로직을 훈련하는 시기</span>입니다.
+            </h2>
+            <div style={{ width: 80, height: 3, background: 'var(--mint)', margin: '2rem auto' }} />
+            <p style={{ fontSize: '1.5rem', fontWeight: 600, lineHeight: 1.6 }}>
+              그래서 그 훈련은<br />
+              <span className="accent-text">사람마다 달라야 합니다.</span>
+            </p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// MLB 지표 데이터
+const mlbMetrics = [
+  { title: 'Launch Angle', baseball: '공을 어떤 각도로 쳤는가', study: '문제를 어떤 개념·관점에서 접근했는가' },
+  { title: 'Exit Velocity', baseball: '얼마나 강하게 맞았는가', study: '운이 아닌 논리로 밀어붙인 풀이인가' },
+  { title: 'Hard Hit Rate', baseball: '아웃이어도 잘 맞은 타구 비율', study: '틀렸어도 사고 방향이 맞았던 풀이의 비율' },
+  { title: 'Barrel Rate', baseball: '각도·속도가 이상적인 타구', study: '조건 해석 → 개념 선택 → 계산 흐름이 모두 맞은 재현 가능한 풀이' },
+  { title: 'Swing & Miss Rate', baseball: '헛스윙이 나는 비율', study: '개념 선택부터 실패한 접근 불가 문제' },
+  { title: 'Chase Rate', baseball: '스트라이크존 밖 공에 속는 비율', study: '불필요한 조건·함정 문장에 끌려가는 판단 습관' },
+  { title: 'Plate Discipline', baseball: '치지 말아야 할 공을 참는 능력', study: '계산 전에 버릴 수 있는 선택지를 버리는 판단력' },
+  { title: 'Spin Rate 대응', baseball: '회전수 변화에 따른 반응', study: '조건이 바뀌었을 때 사고가 흔들리는지 여부' },
+  { title: 'Spray Chart', baseball: '타구 분포 시각화', study: '오답이 몰리는 단원·유형 분포' },
+  { title: 'Split Data', baseball: '상황별 성적 차이', study: '시간 압박·고난도 상황에서의 사고 안정성' },
+];
+
+// Slide 5: MLB 사례 컴포넌트 (클릭 시 10가지 지표 표시)
+const MLBSlide = () => {
+  const [showMetrics, setShowMetrics] = useState(false);
+
+  return (
+    <div
+      style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden', cursor: 'pointer' }}
+      onClick={(e) => { e.stopPropagation(); setShowMetrics(!showMetrics); }}
+    >
+      {!showMetrics ? (
+        <>
+          {/* 오른쪽 오타니 이미지 */}
+          <img
+            src={otani}
+            alt="Ohtani"
+            style={{
+              position: 'absolute',
+              right: '10%',
+              bottom: 0,
+              height: '90%',
+              width: 'auto',
+            }}
+          />
+          {/* 왼쪽 그라데이션 오버레이 */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg, var(--bg-cream) 0%, var(--bg-cream) 40%, transparent 70%)',
+          }} />
+          {/* 왼쪽 텍스트 영역 */}
+          <div style={{
+            position: 'absolute',
+            left: '5%',
+            top: 0,
+            bottom: 0,
+            zIndex: 2,
+            width: '45%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <span className="tag" style={{ marginBottom: '1.5rem' }}>Case Study</span>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '1.5rem', textAlign: 'center' }}>
+              이미 야구는<br />
+              <span className="accent-text">바뀌었습니다</span>
+            </h2>
+            <div className="divider" style={{ marginBottom: '1.5rem' }} />
+            <p className="muted-text" style={{ fontSize: '1.125rem', lineHeight: 1.7, textAlign: 'center' }}>
+              MLB는 더 이상 '타격감' 같은<br />
+              느낌으로 말하지 않습니다.
+            </p>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '1.5rem' }}>
+              모든 것이 데이터로 측정됩니다
+            </p>
+          </div>
+          {/* 오른쪽 상단 데이터 카드 영역 - 8가지 지표 */}
+          <div style={{
+            position: 'absolute',
+            top: '15%',
+            right: '15%',
+            zIndex: 2,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '0.75rem',
+          }}>
+            <div className="stat-card">
+              <p className="stat-label">스윙 각도</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>15°</p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">배트 스피드</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>112<span style={{ fontSize: '0.65rem', fontWeight: 400 }}>km/h</span></p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">발사 속도</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>98<span style={{ fontSize: '0.65rem', fontWeight: 400 }}>mph</span></p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">회전수</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>2400<span style={{ fontSize: '0.65rem', fontWeight: 400 }}>rpm</span></p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">발사 각도</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>28°</p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">타구 거리</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>420<span style={{ fontSize: '0.65rem', fontWeight: 400 }}>ft</span></p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">체류 시간</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>5.2<span style={{ fontSize: '0.65rem', fontWeight: 400 }}>sec</span></p>
+            </div>
+            <div className="stat-card">
+              <p className="stat-label">Hard Hit</p>
+              <p className="stat-number" style={{ fontSize: '1.5rem' }}>54<span style={{ fontSize: '0.65rem', fontWeight: 400 }}>%</span></p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div style={{ width: '100%', height: '100%', padding: '1.5rem 2rem', overflow: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-cream)' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+            <span className="tag" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>Data Metrics</span>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+              MLB에서 실제로 보는 <span className="accent-text">10가지 훈련 지표</span>
+            </h2>
+          </div>
+          <div style={{ width: '100%', maxWidth: 1000, borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ background: 'var(--green-deep)', color: 'white' }}>
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 700, fontSize: '0.9rem', borderBottom: '2px solid var(--mint)' }}>MLB 지표</th>
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 700, fontSize: '0.9rem', borderBottom: '2px solid var(--mint)' }}>야구에서 의미</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mlbMetrics.map((metric, index) => (
+                  <tr key={index} style={{ background: index % 2 === 0 ? 'white' : 'var(--mint-light)', borderBottom: '1px solid var(--gray-light)' }}>
+                    <td style={{ padding: '0.6rem 1rem', fontWeight: 600, color: 'var(--accent-teal)', fontSize: '0.85rem' }}>{metric.title}</td>
+                    <td style={{ padding: '0.6rem 1rem', color: 'var(--text-dark)', fontSize: '0.85rem' }}>{metric.baseball}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// AI 오류 사례 이미지 배열
+const aiErrorImages = [
+  { src: koreanImg, label: '국어' },
+  { src: math1Img, label: '수학' },
+  { src: biology2Img, label: '생명과학' },
+  { src: earthscienceImg, label: '지구과학' },
+];
+
+// AI 오류 사례 컴포넌트 (필터 버튼)
+const AIErrorSlide = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const currentImage = aiErrorImages[currentIndex];
+
+  return (
+    <div style={{ width: '100%', height: '100%', padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <span className="tag" style={{ marginBottom: '0.5rem', display: 'inline-block' }}>AI Limitation</span>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+          Q&A: <span className="accent-text">① AI가 틀린 사례</span>
+        </h2>
+        {/* 필터 버튼 */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginTop: '1rem' }}>
+          {aiErrorImages.map((img, idx) => (
+            <button
+              key={idx}
+              onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
+              style={{
+                padding: '0.5rem 1.25rem',
+                borderRadius: '2rem',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                transition: 'all 0.2s ease',
+                background: currentIndex === idx ? 'var(--green-deep)' : 'var(--gray-light)',
+                color: currentIndex === idx ? 'white' : 'var(--text-muted)',
+              }}
+            >
+              {img.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        <img
+          src={currentImage.src}
+          alt={currentImage.label}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            borderRadius: '0.5rem',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          }}
+        />
+      </div>
+      <p style={{ textAlign: 'center', marginTop: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+        AI도 틀릴 수 있습니다. <strong style={{ color: 'var(--green-deep)' }}>검증하는 습관</strong>이 중요합니다.
+      </p>
+    </div>
+  );
+};
+
+// 학생 사용 패턴 이미지 배열 (2개씩 묶어서 표시)
+const studentPatternImages = [
+  { images: [mathcase1Img, mathcase2Img], label: '수학' },
+  { images: [history1Img, history2Img], label: '사탐' },
+  { images: [dokdoImg], label: '독도' },
+  { images: [socialImg], label: '사탐 검색' },
+];
+
+// 학생 사용 패턴 컴포넌트 (필터 버튼)
+const StudentPatternSlide = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const currentPattern = studentPatternImages[currentIndex];
+
+  return (
+    <div style={{ width: '100%', height: '100%', padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <span className="tag" style={{ marginBottom: '0.5rem', display: 'inline-block' }}>Real Usage</span>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+          Q&A: <span className="accent-text">② 실제 학생 사용 패턴</span>
+        </h2>
+        {/* 필터 버튼 */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginTop: '1rem' }}>
+          {studentPatternImages.map((pattern, idx) => (
+            <button
+              key={idx}
+              onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
+              style={{
+                padding: '0.5rem 1.25rem',
+                borderRadius: '2rem',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                transition: 'all 0.2s ease',
+                background: currentIndex === idx ? 'var(--green-deep)' : 'var(--gray-light)',
+                color: currentIndex === idx ? 'white' : 'var(--text-muted)',
+              }}
+            >
+              {pattern.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', overflow: 'hidden' }}>
+        {currentPattern.images.map((img, idx) => (
+          <img
+            key={idx}
+            src={img}
+            alt={`${currentPattern.label} ${idx + 1}`}
+            style={{
+              maxWidth: currentPattern.images.length > 1 ? '48%' : '100%',
+              maxHeight: '100%',
+              objectFit: 'contain',
+              borderRadius: '0.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// 좋은 사용 예시 데이터
+const goodUsagePrompts = [
+  { title: '문제 검색용', tag: 'SEARCH', prompt: '"이 문제에서 쓰인 개념이 뭐야?"', desc: '개념·조건·유형을 찾는 용도' },
+  { title: '오답 분석용', tag: 'ANALYZE', prompt: '"내가 틀린 문제들 유형별로 정리해줘"', desc: '같은 실수 반복 체크' },
+  { title: '문제 풀이용', tag: 'SOLVE', prompt: '"이 풀이가 수능에서도 안전한 이유 설명해줘"', desc: '수능에서 안전한 풀이 확인' },
+  { title: '사고 측정용', tag: 'TRAIN', prompt: '"나는 이렇게 생각했는데, 어디서 무너질까?"', desc: '답 말고 힌트만 요청', highlight: true },
+];
+
+// 좋은 사용 슬라이드 컴포넌트 (10페이지 스타일)
+const GoodUsageSlide = () => {
+  const [visibleIndex, setVisibleIndex] = useState(-1);
+
+  const handleItemClick = (idx, e) => {
+    e.stopPropagation();
+    setVisibleIndex(visibleIndex === idx ? -1 : idx);
+  };
+
+  return (
+    <div className="split-layout">
+      <div className="split-left">
+        <span className="tag" style={{ marginBottom: '1rem' }}>Good Usage</span>
+        <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+          Q&A: ③ 이렇게 사용했으면 좋겠다 (3/5)
+        </p>
+        <h2 style={{ fontSize: '2rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '1.5rem' }}>
+          이렇게 사용하면<br />
+          <span className="accent-text">훈련이 됩니다</span>
+        </h2>
+        <div className="divider" style={{ marginBottom: '1.5rem' }} />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {goodUsagePrompts.map((item, idx) => (
+            <div
+              key={idx}
+              className="timeline-item"
+              onClick={(e) => handleItemClick(idx, e)}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className="timeline-dot" />
+              {idx < goodUsagePrompts.length - 1 && <div className="timeline-line" />}
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>{item.title}</p>
+                <p className="muted-text" style={{ fontSize: '0.875rem' }}>{item.desc}</p>
+                {visibleIndex === idx && (
+                  <div style={{
+                    marginTop: '0.5rem',
+                    padding: '0.5rem 0.75rem',
+                    background: 'var(--mint-light)',
+                    borderRadius: '0.5rem',
+                    borderLeft: '3px solid var(--green-deep)',
+                  }}>
+                    <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--green-deep)' }}>{item.prompt}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="split-right" style={{ background: 'var(--mint-light)', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <iframe
+          src="https://snargpt.ai"
+          title="SNarGPT"
+          style={{
+            width: '95%',
+            height: '90%',
+            border: '2px solid var(--mint)',
+            borderRadius: '1rem',
+            boxShadow: '0 8px 32px rgba(45, 90, 71, 0.15)',
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+// 잘못된 사용 예시 데이터
+const badUsagePrompts = [
+  { title: '정답만 물어보기', prompt: '"23번 답이 뭐야?"', desc: '정답 확인만 하고 끝' },
+  { title: '풀이 복붙하기', prompt: '"이 문제 풀어줘" → 복붙', desc: '사고 과정 없이 베끼기' },
+  { title: '이해 없이 암기', prompt: '"그냥 공식만 알려줘"', desc: '왜 그런지 안 물어봄' },
+  { title: '생각 없이 의존', prompt: '"모르겠어 그냥 알려줘"', desc: '스스로 시도 안 함' },
+];
+
+// 잘못된 사용 슬라이드 컴포넌트 (10페이지 스타일)
+const BadUsageSlide = () => {
+  const [visibleIndex, setVisibleIndex] = useState(-1);
+  const [extraToggle, setExtraToggle] = useState({ first: false, second: false });
+
+  const handleItemClick = (idx, e) => {
+    e.stopPropagation();
+    setVisibleIndex(visibleIndex === idx ? -1 : idx);
+  };
+
+  const toggleExtra = (key, e) => {
+    e.stopPropagation();
+    setExtraToggle(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  return (
+    <div className="split-layout">
+      <div className="split-left" style={{ overflowY: 'auto' }}>
+        <span className="tag" style={{ marginBottom: '1rem', background: '#fee2e2', color: '#ef4444' }}>Bad Usage</span>
+        <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+          Q&A: ④ 이렇게 사용하면 별로다 (4/5)
+        </p>
+        <h2 style={{ fontSize: '1.75rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '0.5rem' }}>
+          이렇게 사용하면<br />
+          <span style={{ color: '#ef4444' }}>훈련이 안 됩니다</span>
+        </h2>
+        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>(훈련이 무너지는 AI 사용법)</p>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {badUsagePrompts.map((item, idx) => (
+            <div
+              key={idx}
+              className="timeline-item"
+              onClick={(e) => handleItemClick(idx, e)}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className="timeline-dot" />
+              {idx < badUsagePrompts.length - 1 && <div className="timeline-line" />}
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', fontSize: '0.9rem' }}>{item.title}</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}>{item.desc}</p>
+                {visibleIndex === idx && (
+                  <div style={{
+                    marginTop: '0.5rem',
+                    padding: '0.5rem 0.75rem',
+                    background: '#fee2e2',
+                    borderRadius: '0.5rem',
+                    borderLeft: '3px solid #ef4444',
+                  }}>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#ef4444' }}>{item.prompt}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 그 외 유의할 점 토글 섹션 */}
+        <div style={{ marginTop: '1.5rem', borderTop: '1px solid var(--gray-light)', paddingTop: '1rem' }}>
+          <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#ef4444', marginBottom: '0.75rem' }}>그 외 유의할 점</p>
+
+          {/* 1️⃣ 일반 챗봇처럼 사용 */}
+          <div
+            onClick={(e) => toggleExtra('first', e)}
+            style={{
+              padding: '0.75rem',
+              background: extraToggle.first ? '#fee2e2' : 'white',
+              borderRadius: '0.5rem',
+              marginBottom: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #fca5a5',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <p style={{ fontWeight: 600, fontSize: '0.85rem', color: '#ef4444' }}>1️⃣ 일반 챗봇처럼 사용</p>
+              <span style={{ color: '#ef4444' }}>{extraToggle.first ? '−' : '+'}</span>
+            </div>
+            {extraToggle.first && (
+              <div style={{ marginTop: '0.75rem', fontSize: '0.8rem' }}>
+                <p style={{ color: '#ef4444', fontWeight: 600, marginBottom: '0.25rem' }}>❌ 예시</p>
+                <p style={{ color: 'var(--text-dark)', fontStyle: 'italic' }}>"이거 문제 풀어줘"</p>
+                <p style={{ color: 'var(--text-dark)', fontStyle: 'italic', marginBottom: '0.5rem' }}>"이 단어 뜻이 뭐야" (맥락 없이)</p>
+                <p style={{ color: '#ef4444', fontWeight: 600, marginBottom: '0.25rem' }}>👉 결과</p>
+                <p style={{ color: 'var(--text-dark)' }}>빠르긴 하지만 <strong>사고는 하나도 남지 않음</strong></p>
+              </div>
+            )}
+          </div>
+
+          {/* 2️⃣ AI를 억압·무시·하대하는 태도 */}
+          <div
+            onClick={(e) => toggleExtra('second', e)}
+            style={{
+              padding: '0.75rem',
+              background: extraToggle.second ? '#fee2e2' : 'white',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              border: '1px solid #fca5a5',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <p style={{ fontWeight: 600, fontSize: '0.85rem', color: '#ef4444' }}>2️⃣ AI를 억압·무시·하대하는 태도</p>
+              <span style={{ color: '#ef4444' }}>{extraToggle.second ? '−' : '+'}</span>
+            </div>
+            {extraToggle.second && (
+              <div style={{ marginTop: '0.75rem', fontSize: '0.8rem' }}>
+                <p style={{ color: 'var(--text-dark)', marginBottom: '0.25rem' }}>• 욕설, 비하, 조롱 섞인 질문</p>
+                <p style={{ color: 'var(--text-dark)', marginBottom: '0.5rem' }}>• 무리한 명령형 요청</p>
+                <p style={{ color: '#ef4444', fontWeight: 600, marginBottom: '0.25rem' }}>👉 실제로 벌어지는 일:</p>
+                <p style={{ color: 'var(--text-dark)' }}>• 질문의 정보량이 줄어듦</p>
+                <p style={{ color: 'var(--text-dark)', marginBottom: '0.5rem' }}>• AI가 방어 모드로 전환</p>
+                <p style={{ color: '#ef4444', fontWeight: 600 }}>답변은: 얕고, 보수적이고, 최소한으로만 나옴</p>
+                <div style={{ marginTop: '0.5rem', padding: '0.5rem', background: 'rgba(239,68,68,0.1)', borderRadius: '0.25rem', borderLeft: '2px solid #ef4444' }}>
+                  <p style={{ color: '#ef4444', fontWeight: 600, fontSize: '0.8rem' }}>답이 틀리진 않지만, 훈련에는 아무 도움도 안 됩니다.</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="split-right" style={{ background: 'var(--mint-light)', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <iframe
+          src="https://snargpt.ai"
+          title="SNarGPT"
+          style={{
+            width: '95%',
+            height: '90%',
+            border: '2px solid var(--mint)',
+            borderRadius: '1rem',
+            boxShadow: '0 8px 32px rgba(45, 90, 71, 0.15)',
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+// Q&A 사례 데이터
+const qnaExamples = [
+  {
+    title: '① AI가 틀린 사례',
+    tag: 'AI Limitation',
+    content: <AIErrorSlide />,
+    isComponent: true,
+  },
+  {
+    title: '② 실제 학생 사용 패턴',
+    tag: 'Real Usage',
+    content: <StudentPatternSlide />,
+    isComponent: true,
+  },
+  {
+    title: '③ 이렇게 사용했으면 좋겠다',
+    tag: 'Good Usage',
+    content: <GoodUsageSlide />,
+    isComponent: true,
+  },
+  {
+    title: '④ 이렇게 사용하면 별로다',
+    tag: 'Bad Usage',
+    content: <BadUsageSlide />,
+    isComponent: true,
+  },
+  {
+    title: '⑥ 현재와 앞으로',
+    tag: 'Roadmap',
+    content: (
+      <div className="split-layout">
+        <div className="split-left" style={{ flex: '0 0 50%', display: 'flex', flexDirection: 'column' }}>
+          <span className="tag" style={{ marginBottom: '1rem' }}>Available Now</span>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '1.5rem' }}>
+            현재까지<br />
+            <span className="accent-text">가능한 것</span>
+          </h2>
+          <div className="divider" style={{ marginBottom: '1.5rem' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>수학문제 전체 검색</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>고1~3 교육청, 평가원 문제 전체<br />저작권 없는 문제 모두 검색 가능</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>유사문제 검색</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>교육청, 평가원 문제 전체 검색 가능<br />사설문제 유사도 검색 가능 (SN멤버 한정)<br />문제출력 X, 변형문제만 제공</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>문제 생성</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>평가원 스타일의 문제 생성<br />(수능 스타일, 용어, 계산난도 등 변경가능)</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>인터넷 정보 검색 가능</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>학원 식단표, 교육기사, 커뮤니티 반응 등</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>유튜브 / 음성·영상 파일 분석</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>강의록 요약, 전사, 핵심문제, 퀴즈 등</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="split-right" style={{ display: 'flex', flexDirection: 'column', background: 'var(--mint-light)' }}>
+          <span className="tag" style={{ marginBottom: '1rem', background: 'var(--mint)', color: 'var(--green-deep)' }}>Coming Soon</span>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '1.5rem' }}>
+            앞으로<br />
+            <span className="accent-text">개발 할 것들</span>
+          </h2>
+          <div className="divider" style={{ marginBottom: '1.5rem' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>수능 전문항 DB 완료</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>국어, 영어, 사탐, 과탐<br />평가원·교육청 문제</p>
+                <span style={{ display: 'inline-block', marginTop: '0.5rem', padding: '0.25rem 0.5rem', background: 'var(--mint)', borderRadius: '0.25rem', fontSize: '0.75rem', fontWeight: 600, color: 'var(--green-deep)' }}>2월 목표</span>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>평가원 스타일 문제 생성 고도화</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>앞으로 더 평가원스러운 문제 생성</p>
+                <span style={{ display: 'inline-block', marginTop: '0.5rem', padding: '0.25rem 0.5rem', background: 'var(--mint)', borderRadius: '0.25rem', fontSize: '0.75rem', fontWeight: 600, color: 'var(--green-deep)' }}>6월 목표</span>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>대한민국 수능 관련 전과목 강의 및 사설문제 학습</p>
+                <p className="muted-text" style={{ fontSize: '0.85rem' }}>전과목 강의 데이터 및 사설문제 학습 완료</p>
+                <span style={{ display: 'inline-block', marginTop: '0.5rem', padding: '0.25rem 0.5rem', background: 'var(--mint)', borderRadius: '0.25rem', fontSize: '0.75rem', fontWeight: 600, color: 'var(--green-deep)' }}>9월 목표</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: '⑤ 자주 묻는 질문',
+    tag: 'FAQ',
+    content: (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10rem', width: '100%', height: '100%' }}>
+        <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span className="tag" style={{ marginBottom: '1rem' }}>For Students</span>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, lineHeight: 1.4, marginBottom: '1.5rem' }}>
+            학생 입장에서 본<br />
+            SNarGPT의<br />
+            <span className="accent-text">'찐' 장점</span>
+          </h2>
+          <div className="divider" style={{ marginBottom: '1.5rem' }} />
+          <p className="muted-text" style={{ fontSize: '0.95rem', lineHeight: 1.6 }}>
+            기능이 아니라<br />
+            <strong style={{ color: 'var(--text-dark)' }}>여러분의 하루</strong>가<br />
+            어떻게 달라지는지 보세요.
+          </p>
+        </div>
+        <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', overflowY: 'auto' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>제미나이, ChatGPT 기능? 당연히 다 돼요</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}>범용 기능 + <strong style={{ color: 'var(--green-deep)' }}>입시 전문성</strong> 추가</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>수학 문제, 혼자 끙끙대지 마세요</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}><strong style={{ color: 'var(--green-deep)' }}>SNarGo</strong>가 99.9% 정확도로 단계별 풀이</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>근거 없는 추측 NO! 정확한 기출 데이터</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}><strong style={{ color: 'var(--green-deep)' }}>RAG</strong>로 실제 기출에서 실시간 검색</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>'나'를 기억하는 AI</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}>어제 공부한 것, 점심 메뉴, 외출 일정까지 다 기억</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>창의력의 끝판왕 SNarGen</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}>킬러 변형문제 생성, 개념 시각화</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>딴 길로 새지 않는 페이스메이커</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}><strong style={{ color: 'var(--green-deep)' }}>SNarKeeper</strong>가 학습 외 질문 차단</p>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot" />
+              <div>
+                <p style={{ fontWeight: 600, marginBottom: '0.15rem', fontSize: '0.9rem' }}>지칠 때 진심으로 응원해주는 내 편</p>
+                <p className="muted-text" style={{ fontSize: '0.8rem' }}>여러분의 성공을 바라는 조력자</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+];
+
+// 개별 Q&A 슬라이드 컴포넌트
+const QnASlideItem = ({ example, index, total }) => {
+  return (
+    <div style={{ width: '100%', height: '100%', padding: '2rem 3rem', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+        <span className="tag" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>{example.tag}</span>
+        <h2 style={{ fontSize: '1.75rem', fontWeight: 700 }}>
+          Q&A: <span className="accent-text">{example.title}</span>
+        </h2>
+        <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
+          ({index + 1} / {total})
+        </p>
+      </div>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {example.content}
+      </div>
+    </div>
+  );
+};
 
 const slides = [
   // Slide 0: Title - 매거진 스타일 타이틀
@@ -304,107 +1074,17 @@ const slides = [
     ),
   },
 
-  // Slide 4: 핵심 질문 - 강조 슬라이드 (어두운 배경)
+  // Slide 4: 핵심 질문 - 강조 슬라이드 (어두운 배경, 클릭 시 텍스트 변경)
   {
     id: 4,
     className: 'slide-emphasis-bg',
-    content: (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '4rem', textAlign: 'center' }}>
-        <DecorativeCircles />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 800 }}>
-          <span className="tag" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', marginBottom: '2rem', display: 'inline-block' }}>Core Question</span>
-          <h2 style={{ fontSize: '3rem', fontWeight: 700, lineHeight: 1.4, marginBottom: '2rem' }}>
-            "여러분은 <span className="accent-text">왜 틀렸는지</span><br />
-            알고 틀립니까, 모르고 틀립니까?<br />
-            그리고 데이터로 남습니까?"
-          </h2>
-          <div style={{ width: 80, height: 3, background: 'var(--mint)', margin: '2rem auto' }} />
-          <p className="muted-text" style={{ fontSize: '1.25rem' }}>
-            이유를 모르는 틀림은 '훈련'이 아니라 <strong style={{ color: 'var(--mint)' }}>'반복 노동'</strong>일 뿐입니다.
-          </p>
-        </div>
-      </div>
-    ),
+    content: <CoreQuestionSlide />,
   },
 
-  // Slide 5: MLB 사례 - 데이터 카드
+  // Slide 5: MLB 사례 - 데이터 카드 (클릭 시 10개 지표 표시)
   {
     id: 5,
-    content: (
-      <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
-        {/* 오른쪽 오타니 이미지 */}
-        <img
-          src={otani}
-          alt="Ohtani"
-          style={{
-            position: 'absolute',
-            right: '10%',
-            bottom: 0,
-            height: '90%',
-            width: 'auto',
-          }}
-        />
-        {/* 왼쪽 그라데이션 오버레이 */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(90deg, var(--bg-cream) 0%, var(--bg-cream) 40%, transparent 70%)',
-        }} />
-        {/* 왼쪽 텍스트 영역 - 중앙 배치 */}
-        <div style={{
-          position: 'absolute',
-          left: '5%',
-          top: 0,
-          bottom: 0,
-          zIndex: 2,
-          width: '45%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          <span className="tag" style={{ marginBottom: '1.5rem' }}>Case Study</span>
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '1.5rem', textAlign: 'center' }}>
-            이미 야구는<br />
-            <span className="accent-text">바뀌었습니다</span>
-          </h2>
-          <div className="divider" style={{ marginBottom: '1.5rem' }} />
-          <p className="muted-text" style={{ fontSize: '1.125rem', lineHeight: 1.7, textAlign: 'center' }}>
-            MLB는 더 이상 '타격감' 같은<br />
-            느낌으로 말하지 않습니다.
-          </p>
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '1.5rem' }}>
-            모든 것이 데이터로 측정됩니다
-          </p>
-        </div>
-        {/* 오른쪽 상단 데이터 카드 영역 - 오타니 이미지 위 */}
-        <div style={{
-          position: 'absolute',
-          top: '20%',
-          right: '20%',
-          zIndex: 2,
-          display: 'flex',
-          gap: '1rem',
-        }}>
-          <div className="stat-card">
-            <p className="stat-label">스윙 각도</p>
-            <p className="stat-number" style={{ fontSize: '1.75rem' }}>15°</p>
-          </div>
-          <div className="stat-card">
-            <p className="stat-label">배트 스피드</p>
-            <p className="stat-number" style={{ fontSize: '1.75rem' }}>112<span style={{ fontSize: '0.75rem', fontWeight: 400 }}>km/h</span></p>
-          </div>
-          <div className="stat-card">
-            <p className="stat-label">발사 속도</p>
-            <p className="stat-number" style={{ fontSize: '1.75rem' }}>98<span style={{ fontSize: '0.75rem', fontWeight: 400 }}>mph</span></p>
-          </div>
-          <div className="stat-card">
-            <p className="stat-label">회전수</p>
-            <p className="stat-number" style={{ fontSize: '1.75rem' }}>2400<span style={{ fontSize: '0.75rem', fontWeight: 400 }}>rpm</span></p>
-          </div>
-        </div>
-      </div>
-    ),
+    content: <MLBSlide />,
   },
 
   // Slide 6: 공부의 현실
@@ -451,9 +1131,31 @@ const slides = [
     ),
   },
 
-  // Slide 7: SNarGPT 소개 - 강조 슬라이드
+  // Slide 7: 수능의 본질 - 강조 슬라이드
   {
     id: 7,
+    className: 'slide-emphasis-bg',
+    content: (
+      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '4rem', textAlign: 'center' }}>
+        <DecorativeCircles />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
+          <span className="tag" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', marginBottom: '2rem', display: 'inline-block' }}>The Truth</span>
+          <p style={{ fontSize: '1.5rem', lineHeight: 1.8, marginBottom: '2rem' }}>
+            이 구조는 바둑이나 야구 이야기처럼 들리지만,<br />
+            <span className="accent-text" style={{ fontWeight: 700 }}>수능은 이 구조가 가장 잔인하게 드러나는 시험</span>입니다.
+          </p>
+          <p style={{ fontSize: '1.5rem', lineHeight: 1.8 }}>
+            같은 개념을 배우고, 같은 문제를 보는데<br />
+            왜 항상 같은 학생들만 맞힐까요?
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  // Slide 8: SNarGPT 소개 - 강조 슬라이드
+  {
+    id: 8,
     className: 'slide-emphasis-bg',
     content: (
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '4rem', textAlign: 'center' }}>
@@ -483,9 +1185,9 @@ const slides = [
     ),
   },
 
-  // Slide 8: Scene 1 - 타임라인 스타일
+  // Slide 9: Scene 1 - 타임라인 스타일
   {
-    id: 8,
+    id: 9,
     content: (
       <div className="split-layout">
         <div className="split-left">
@@ -547,9 +1249,9 @@ const slides = [
     ),
   },
 
-  // Slide 9: Scene 2
+  // Slide 10: Scene 2
   {
-    id: 9,
+    id: 10,
     content: (
       <div className="split-layout">
         <div className="split-left">
@@ -582,9 +1284,9 @@ const slides = [
     ),
   },
 
-  // Slide 10: Scene 3 - AI 코치 대결
+  // Slide 11: Scene 3 - AI 코치 대결
   {
-    id: 10,
+    id: 11,
     content: (
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '4rem 5rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -638,9 +1340,9 @@ const slides = [
     ),
   },
 
-  // Slide 11: 시스템 1/3 - 원형 인포그래픽
+  // Slide 12: 시스템 1/3 - 원형 인포그래픽
   {
-    id: 11,
+    id: 12,
     content: (
       <div className="split-layout">
         <div className="split-left" style={{ flex: '0 0 45%' }}>
@@ -682,9 +1384,9 @@ const slides = [
     ),
   },
 
-  // Slide 12: 결론 - 강조 슬라이드
+  // Slide 13: 결론 - 강조 슬라이드
   {
-    id: 12,
+    id: 13,
     className: 'slide-emphasis-bg',
     content: (
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '4rem', textAlign: 'center' }}>
@@ -717,6 +1419,42 @@ const slides = [
         </div>
       </div>
     ),
+  },
+
+  // Slide 14: Q&A - ① AI가 틀린 사례 (토글로 4개 과목 이미지 보기)
+  {
+    id: 14,
+    content: <AIErrorSlide />,
+  },
+
+  // Slide 15: Q&A - ② 실제 학생 사용 패턴 (필터로 4개 화면)
+  {
+    id: 15,
+    content: <StudentPatternSlide />,
+  },
+
+  // Slide 16: Q&A - ③ 좋은 사용 예시 (iframe 전체 높이 사용)
+  {
+    id: 16,
+    content: <GoodUsageSlide />,
+  },
+
+  // Slide 17: Q&A - ④ 잘못된 사용 예시 (iframe 전체 높이 사용)
+  {
+    id: 17,
+    content: <BadUsageSlide />,
+  },
+
+  // Slide 18: Q&A - ⑤ 자주 묻는 질문 (FAQ)
+  {
+    id: 18,
+    content: <QnASlideItem example={qnaExamples[5]} index={4} total={6} />,
+  },
+
+  // Slide 19: Q&A - ⑥ 현재와 앞으로 (Roadmap)
+  {
+    id: 19,
+    content: <QnASlideItem example={qnaExamples[4]} index={5} total={6} />,
   },
 ];
 
