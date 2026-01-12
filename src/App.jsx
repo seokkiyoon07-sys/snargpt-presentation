@@ -29,6 +29,9 @@ import history1Img from '/history1.png';
 import history2Img from '/history2.png';
 import dokdoImg from '/dokdo.png';
 import socialImg from '/social.png';
+import keeper1Img from '/keeper1.png';
+import keeper1_1Img from '/keeper1-1.png';
+import keeper1_2Img from '/keeper1-2.jpg';
 
 // 체크 아이콘 컴포넌트
 const CheckIcon = () => (
@@ -730,6 +733,64 @@ const StudentPatternSlide = () => {
           />
         ))}
       </div>
+    </div>
+  );
+};
+
+// 관리자 검증 화면 (Keeper) 컴포넌트
+const KeeperSlide = () => {
+  return (
+    <div style={{ width: '100%', height: '100%', padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
+        <span className="tag" style={{ marginBottom: '0.5rem', display: 'inline-block', background: '#fee2e2', color: '#ef4444' }}>Admin Verification</span>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+          Q&A: <span className="accent-text">③ 관리자 검증 화면</span>
+        </h2>
+      </div>
+      <div style={{ flex: 1, display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        {/* 왼쪽 열: keeper1, keeper1-1 세로 배치 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', height: '100%', justifyContent: 'center' }}>
+          <img
+            src={keeper1Img}
+            alt="감지 화면 1"
+            style={{
+              maxWidth: '100%',
+              maxHeight: '48%',
+              objectFit: 'contain',
+              borderRadius: '0.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+            }}
+          />
+          <img
+            src={keeper1_1Img}
+            alt="감지 화면 1-1"
+            style={{
+              maxWidth: '100%',
+              maxHeight: '48%',
+              objectFit: 'contain',
+              borderRadius: '0.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+            }}
+          />
+        </div>
+        {/* 오른쪽: keeper1-2 */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <img
+            src={keeper1_2Img}
+            alt="감지 화면 1-2"
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              objectFit: 'contain',
+              borderRadius: '0.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+            }}
+          />
+        </div>
+      </div>
+      <p style={{ textAlign: 'center', marginTop: '0.75rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+        학습 외 사용하면 <strong style={{ color: '#ef4444' }}>SNarKeeper</strong>가 자동 감지합니다.
+      </p>
     </div>
   );
 };
@@ -2674,28 +2735,34 @@ const slides = [
     content: <StudentPatternSlide />,
   },
 
-  // Slide 18: Q&A - ③ 좋은 사용 예시 (iframe 전체 높이 사용)
+  // Slide 18: Q&A - ③ 관리자 검증 화면 (Keeper)
   {
     id: 18,
+    content: <KeeperSlide />,
+  },
+
+  // Slide 19: Q&A - ④ 좋은 사용 예시 (iframe 전체 높이 사용)
+  {
+    id: 19,
     content: <GoodUsageSlide />,
   },
 
-  // Slide 19: Q&A - ④ 잘못된 사용 예시 (iframe 전체 높이 사용)
+  // Slide 20: Q&A - ⑤ 잘못된 사용 예시 (iframe 전체 높이 사용)
   {
-    id: 19,
+    id: 20,
     content: <BadUsageSlide />,
   },
 
-  // Slide 20: Q&A - ⑤ 자주 묻는 질문 (FAQ)
-  {
-    id: 20,
-    content: <QnASlideItem example={qnaExamples[5]} index={4} total={6} />,
-  },
-
-  // Slide 21: Q&A - ⑥ 현재와 앞으로 (Roadmap)
+  // Slide 21: Q&A - ⑥ 자주 묻는 질문 (FAQ)
   {
     id: 21,
-    content: <QnASlideItem example={qnaExamples[4]} index={5} total={6} />,
+    content: <QnASlideItem example={qnaExamples[5]} index={4} total={7} />,
+  },
+
+  // Slide 22: Q&A - ⑦ 현재와 앞으로 (Roadmap)
+  {
+    id: 22,
+    content: <QnASlideItem example={qnaExamples[4]} index={5} total={7} />,
   },
 ];
 
