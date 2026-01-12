@@ -1264,6 +1264,78 @@ const qnaExamples = [
       </div>
     ),
   },
+  {
+    title: '⑤ 자주 묻는 질문 2',
+    tag: 'FAQ',
+    content: (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4rem', width: '100%', height: '100%', padding: '2rem' }}>
+        <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <span className="tag" style={{ marginBottom: '1rem' }}>VS ChatGPT</span>
+          <h2 style={{ fontSize: '1.3rem', fontWeight: 700, lineHeight: 1.4, marginBottom: '1rem' }}>
+            일반 LLM과<br />
+            <span className="accent-text">SNarGPT</span>의<br />
+            차이가 뭔가요?
+          </h2>
+          <div className="divider" style={{ marginBottom: '1rem' }} />
+          <p className="muted-text" style={{ fontSize: '0.85rem', lineHeight: 1.6 }}>
+            ChatGPT, 제미나이도 똑똑하지만<br />
+            <strong style={{ color: 'var(--text-dark)' }}>수능 공부</strong>만큼은<br />
+            SNarGPT가 다릅니다.
+          </p>
+        </div>
+        <div style={{ flex: '1', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+          <div style={{ background: 'var(--mint-light)', borderRadius: '12px', padding: '1.2rem', border: '1px solid var(--mint)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '1.2rem' }}>🛡️</span>
+              <p style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--green-deep)' }}>"그럴듯한 답"이 아니라 "증명된 정답"</p>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem' }}>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', color: 'var(--text-muted)' }}>일반 AI</p>
+                <p className="muted-text">수천억 문장 학습한 "똑똑한 백과사전"<br />복잡한 문제에서 <strong style={{ color: '#e74c3c' }}>그럴듯한 오답(환각)</strong> 위험</p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', color: 'var(--green-deep)' }}>SNarGPT</p>
+                <p className="muted-text"><strong style={{ color: 'var(--green-deep)' }}>SNarGo + Symbolic Checker</strong>로<br />풀이 과정 끝까지 검증, SN이 보증하는 정답</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ background: 'var(--mint-light)', borderRadius: '12px', padding: '1.2rem', border: '1px solid var(--mint)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '1.2rem' }}>🧠</span>
+              <p style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--green-deep)' }}>"어제의 실수"를 기억하는 유일한 파트너</p>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem' }}>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', color: 'var(--text-muted)' }}>일반 AI</p>
+                <p className="muted-text">대화 끝나면 <strong style={{ color: '#e74c3c' }}>전부 리셋</strong><br />매번 똑같은 설명 반복 필요</p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', color: 'var(--green-deep)' }}>SNarGPT</p>
+                <p className="muted-text"><strong style={{ color: 'var(--green-deep)' }}>비밀노트(Secret Note)</strong>로<br />실수 패턴, 목표 대학, 약점 과목 전부 기억</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ background: 'var(--mint-light)', borderRadius: '12px', padding: '1.2rem', border: '1px solid var(--mint)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '1.2rem' }}>✍️</span>
+              <p style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--green-deep)' }}>"수능의 언어"로 대화합니다</p>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem' }}>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', color: 'var(--text-muted)' }}>일반 AI</p>
+                <p className="muted-text">전 세계 데이터 학습<br /><strong style={{ color: '#e74c3c' }}>어려운 대학 용어, 번역투</strong>로 혼란</p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, marginBottom: '0.25rem', color: 'var(--green-deep)' }}>SNarGPT</p>
+                <p className="muted-text"><strong style={{ color: 'var(--green-deep)' }}>대한민국 수능 + 평가원 스타일</strong> 최적화<br />학원 일정, 식단, 날씨까지 케어</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
 ];
 
 // 개별 Q&A 슬라이드 컴포넌트
@@ -2756,13 +2828,19 @@ const slides = [
   // Slide 21: Q&A - ⑥ 자주 묻는 질문 (FAQ)
   {
     id: 21,
-    content: <QnASlideItem example={qnaExamples[5]} index={4} total={7} />,
+    content: <QnASlideItem example={qnaExamples[5]} index={4} total={8} />,
   },
 
-  // Slide 22: Q&A - ⑦ 현재와 앞으로 (Roadmap)
+  // Slide 22: Q&A - ⑦ 자주 묻는 질문 2 (일반 LLM vs SNarGPT)
   {
     id: 22,
-    content: <QnASlideItem example={qnaExamples[4]} index={5} total={7} />,
+    content: <QnASlideItem example={qnaExamples[6]} index={5} total={8} />,
+  },
+
+  // Slide 23: Q&A - ⑧ 현재와 앞으로 (Roadmap)
+  {
+    id: 23,
+    content: <QnASlideItem example={qnaExamples[4]} index={6} total={8} />,
   },
 ];
 
